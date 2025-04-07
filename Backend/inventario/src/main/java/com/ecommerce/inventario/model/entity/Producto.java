@@ -34,7 +34,7 @@ public class Producto {
     private Double precioVenta;
 
     @OneToOne
-    @JoinColumn(name = "detalle_produto_id")
+    @JoinColumn(name = "detalle_producto_id")
     private DetalleProducto detalleProducto;
 
     // Constructores

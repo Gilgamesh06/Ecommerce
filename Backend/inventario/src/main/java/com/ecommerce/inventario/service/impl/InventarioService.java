@@ -68,4 +68,10 @@ public class InventarioService implements CrudInterface<Inventario,InventarioRes
         return convetiddorInventarioResponseDTO(inventario);
     }
 
+    public List<InventarioResponseDTO> getProducts(List<Long> ids){
+       List<Inventario> inventarios = this.inventarioRepository.findAllById(ids);
+       return inventarios.stream()
+               .map(this::convetiddorInventarioResponseDTO)
+               .toList();
+    }
 }

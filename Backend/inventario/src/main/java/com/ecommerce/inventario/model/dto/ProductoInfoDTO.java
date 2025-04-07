@@ -30,7 +30,7 @@ public class ProductoInfoDTO {
 
     // Constructor
     public ProductoInfoDTO(){}
-    public ProductoInfoDTO(String referencia, String nombre, String tipo, String talla, String color, String target, String subtipo, Double precioUnid, Double precioVenta) {
+    public ProductoInfoDTO(String referencia, String nombre, String talla, String color, String target, String subtipo, Double precioUnid, Double precioVenta) {
         this.referencia = referencia;
         this.nombre = nombre;
         this.talla = talla;

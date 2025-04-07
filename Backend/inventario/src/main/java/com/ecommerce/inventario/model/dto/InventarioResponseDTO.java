@@ -1,8 +1,6 @@
 package com.ecommerce.inventario.model.dto;
 
-import com.ecommerce.inventario.model.entity.Producto;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 
 public class InventarioResponseDTO {

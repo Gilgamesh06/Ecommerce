@@ -3,7 +3,6 @@ package com.ecommerce.inventario.controller;
 import com.ecommerce.inventario.model.dto.InventarioAddDTO;
 import com.ecommerce.inventario.model.dto.InventarioResponseDTO;
 import com.ecommerce.inventario.model.dto.ProductoSearchDTO;
-import com.ecommerce.inventario.model.entity.Inventario;
 import com.ecommerce.inventario.service.impl.InventarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,5 +36,11 @@ public class InventarioController {
     public ResponseEntity<InventarioResponseDTO> addProduct(@RequestBody InventarioAddDTO inventarioAddDTO){
         InventarioResponseDTO inventarioResponseDTO = this.inventarioService.addElement(inventarioAddDTO);
         return new ResponseEntity<>(inventarioResponseDTO,HttpStatus.CREATED);
+    }
+
+    @GetMapping("/listar-productos")
+    public ResponseEntity<List<InventarioResponseDTO>> getListProduct(@RequestBody List<Long> productIds){
+        List<InventarioResponseDTO> inventarioResponseDTO = this.inventarioService.getProducts(productIds);
+        return new ResponseEntity<>(inventarioResponseDTO,HttpStatus.OK);
     }
 }

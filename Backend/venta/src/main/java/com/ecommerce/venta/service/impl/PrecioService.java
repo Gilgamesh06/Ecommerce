@@ -41,7 +41,7 @@ public class PrecioService implements GetAndSave<Precio, PrecioResponseDTO, Prec
                 .toList();
     }
 
-    private PrecioResponseDTO converPrecioResponseDTO(Precio precio){
+    public PrecioResponseDTO converPrecioResponseDTO(Precio precio){
         PrecioResponseDTO precioResponseDTO = new PrecioResponseDTO();
         precioResponseDTO.setPrecioVenta(precio.getPrecioVenta());
         precioResponseDTO.setFecha(precio.getFecha());

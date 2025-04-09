@@ -2,7 +2,6 @@ package com.ecommerce.venta.model.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity(name="precio")

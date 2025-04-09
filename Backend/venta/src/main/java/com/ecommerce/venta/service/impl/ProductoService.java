@@ -5,6 +5,7 @@ import com.ecommerce.venta.model.dto.precio.PrecioAddDTO;
 import com.ecommerce.venta.model.dto.producto.ProductoAddDTO;
 import com.ecommerce.venta.model.dto.producto.ProductoInfoDTO;
 import com.ecommerce.venta.model.dto.producto.ProductoResponseDTO;
+import com.ecommerce.venta.model.entity.Precio;
 import com.ecommerce.venta.model.entity.Producto;
 import com.ecommerce.venta.repository.ProductoRepository;
 import com.ecommerce.venta.service.interfaces.GetAndSave;
@@ -25,13 +26,14 @@ public class ProductoService implements GetAndSave<Producto, ProductoResponseDTO
         this.precioService = precioService;
     }
 
-    private ProductoResponseDTO convertProductoResposeDTO(Producto producto){
+    public ProductoResponseDTO convertProductoResposeDTO(Producto producto){
+        Optional<Precio> precioOpt = this.precioService.getPrecio(producto.getId());
         ProductoResponseDTO productoResponseDTO = new ProductoResponseDTO();
         productoResponseDTO.setNombre(producto.getNombre());
         productoResponseDTO.setReferencia(producto.getReferencia());
         productoResponseDTO.setTalla(producto.getTalla());
         productoResponseDTO.setColor(producto.getColor());
-
+        precioOpt.ifPresent(precio -> productoResponseDTO.setPrecioVenta(precio.getPrecioVenta()));
         return productoResponseDTO;
     }
 
@@ -70,6 +72,7 @@ public class ProductoService implements GetAndSave<Producto, ProductoResponseDTO
         return this.productoRepository.findByReferenciaAndTallaAndColor(referencia,talla,color);
     }
 
+
     /*
     Este metodo me comprueba que los productos del servicio del inventario esten si no estan los agrega
     y retorna una lista de PrecioAddDTO para manejar la logica de historial de precios
@@ -98,6 +101,15 @@ public class ProductoService implements GetAndSave<Producto, ProductoResponseDTO
         return precios;
     }
 
+    public List<Producto> RetornarProductosVenta(List<InventarioResponseDTO> productosInventario){
+        List<PrecioAddDTO> precioAddDTOS = this.ComporbarProductosVenta(productosInventario);
+        List<Precio> precios = precioAddDTOS.stream()
+                .map(this.precioService::addPrecio)
+                .toList();
+        return  precios.stream()
+                .map(Precio::getProducto)
+                .toList();
+    }
 
     @Override
     public ProductoResponseDTO addElement(ProductoAddDTO addProducto) {

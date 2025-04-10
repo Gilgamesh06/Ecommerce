@@ -1,0 +1,629 @@
+{
+  "info": {
+    "name": "Ecommerce",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "bruno",
+      "event": []
+    },
+    {
+      "name": "Inventario",
+      "item": [
+        {
+          "name": "Agregar",
+          "item": [
+            {
+              "name": "Producto 1",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/agregar",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "agregar"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cantidad\": 10,\n    \"productoAddDTO\": {\n        \"referencia\": \"REF001\",\n        \"nombre\": \"Camisa Casual\",\n        \"talla\": \"M\",\n        \"tipo\": \"Ropa\",\n        \"subtipo\": \"Camisa\",\n        \"target\": \"Hombre\",\n        \"color\": \"Azul\",\n        \"precioUnid\": 25.99,\n        \"precioVenta\": 30.99,\n        \"detalleProductoAddDTO\": {\n            \"descripcion\": \"Camisa de algodón de manga larga.\",\n            \"composicion\": \"100% algodón\",\n            \"pais\": \"España\"\n        }\n    }\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Producto 2",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/agregar",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "agregar"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cantidad\": 5,\n    \"productoAddDTO\": {\n        \"referencia\": \"REF002\",\n        \"nombre\": \"Pantalón Deportivo\",\n        \"talla\": \"L\",\n        \"tipo\": \"Ropa\",\n        \"subtipo\": \"Pantalón\",\n        \"target\": \"Mujer\",\n        \"color\": \"Negro\",\n        \"precioUnid\": 35.50,\n        \"precioVenta\": 40.00,\n        \"detalleProductoAddDTO\": {\n            \"descripcion\": \"Pantalón deportivo con tecnología de secado rápido.\",\n            \"composicion\": \"80% poliéster, 20% elastano\",\n            \"pais\": \"Italia\"\n        }\n    }\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Producto 3",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/agregar",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "agregar"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cantidad\": 15,\n    \"productoAddDTO\": {\n        \"referencia\": \"REF003\",\n        \"nombre\": \"Zapatillas de Deporte\",\n        \"talla\": \"42\",\n        \"tipo\": \"Calzado\",\n        \"subtipo\": \"Zapatillas\",\n        \"target\": \"Unisex\",\n        \"color\": \"Blanco\",\n        \"precioUnid\": 60.00,\n        \"precioVenta\": 70.00,\n        \"detalleProductoAddDTO\": {\n            \"descripcion\": \"Zapatillas ligeras para correr.\",\n            \"composicion\": \"Material sintético\",\n            \"pais\": \"China\"\n        }\n    }\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Producto 4",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/agregar",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "agregar"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cantidad\": 8,\n    \"productoAddDTO\": {\n        \"referencia\": \"REF004\",\n        \"nombre\": \"Chaqueta de Invierno\",\n        \"talla\": \"S\",\n        \"tipo\": \"Ropa\",\n        \"subtipo\": \"Chaqueta\",\n        \"target\": \"Mujer\",\n        \"color\": \"Rojo\",\n        \"precioUnid\": 80.00,\n        \"precioVenta\": 95.00,\n        \"detalleProductoAddDTO\": {\n            \"descripcion\": \"Chaqueta de invierno con aislamiento térmico.\",\n            \"composicion\": \"100% poliéster\",\n            \"pais\": \"Francia\"\n        }\n    }\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Producto 5",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/agregar",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "agregar"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cantidad\": 20,\n    \"productoAddDTO\": {\n        \"referencia\": \"REF005\",\n        \"nombre\": \"Gorra de Beisbol\",\n        \"talla\": \"Única\",\n        \"tipo\": \"Accesorios\",\n        \"subtipo\": \"Gorra\",\n        \"target\": \"Unisex\",\n        \"color\": \"Verde\",\n        \"precioUnid\": 15.00,\n        \"precioVenta\": 20.00,\n        \"detalleProductoAddDTO\": {\n            \"descripcion\": \"Gorra ajustable con visera.\",\n            \"composicion\": \"100% algodón\",\n            \"pais\": \"México\"\n        }\n    }\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Producto 6",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/agregar",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "agregar"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cantidad\": 10,\n    \"productoAddDTO\": {\n        \"referencia\": \"REF001\",\n        \"nombre\": \"Camisa Casual\",\n        \"talla\": \"L\",\n        \"tipo\": \"Ropa\",\n        \"subtipo\": \"Camisa\",\n        \"target\": \"Hombre\",\n        \"color\": \"Azul\",\n        \"precioUnid\": 25.99,\n        \"precioVenta\": 30.99,\n        \"detalleProductoAddDTO\": {\n            \"descripcion\": \"Camisa de algodón de manga larga.\",\n            \"composicion\": \"100% algodón\",\n            \"pais\": \"España\"\n        }\n    }\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Producto 7",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/agregar",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "agregar"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cantidad\": 10,\n    \"productoAddDTO\": {\n        \"referencia\": \"REF001\",\n        \"nombre\": \"Camisa Casual\",\n        \"talla\": \"L\",\n        \"tipo\": \"Ropa\",\n        \"subtipo\": \"Camisa\",\n        \"target\": \"Hombre\",\n        \"color\": \"Verde\",\n        \"precioUnid\": 25.99,\n        \"precioVenta\": 30.99,\n        \"detalleProductoAddDTO\": {\n            \"descripcion\": \"Camisa de algodón de manga larga.\",\n            \"composicion\": \"100% algodón\",\n            \"pais\": \"España\"\n        }\n    }\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Buscar",
+          "item": [
+            {
+              "name": "Buscar Producto 1",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/listar",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "listar"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referencia\": \"REF001\",\n  \"talla\": \"M\",\n  \"color\": \"Azul\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Buscar Producto 3",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/listar",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "listar"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referencia\": \"REF003\",\n  \"talla\": \"42\",\n  \"color\": \"Blanco\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Buscar Producto 6",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/listar",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "listar"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referencia\": \"REF001\",\n  \"talla\": \"L\",\n  \"color\": \"Azul\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Buscar Producto 7",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/listar",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "listar"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referencia\": \"REF001\",\n  \"talla\": \"L\",\n  \"color\": \"Verde\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Listar",
+          "item": [
+            {
+              "name": "Listar Todo Inventario",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/listar-todos",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "listar-todos"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Listar Ids",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/listar-productos",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "listar-productos"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "[1,2,3]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Venta",
+      "item": [
+        {
+          "name": "Crear Venta",
+          "item": [
+            {
+              "name": "Venta 1",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8082/api/v1/ventas/realiza-venta",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8082"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "ventas",
+                    "realiza-venta"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"productoId\":1,\n    \"cantidad\":1\n  },\n  {\n    \"productoId\":2,\n    \"cantidad\":2   \n  },\n  {\n    \"productoId\":3,\n    \"cantidad\":3\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": []
+}

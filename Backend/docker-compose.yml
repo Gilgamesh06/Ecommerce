@@ -1,0 +1,64 @@
+version: "3.8"
+
+services:
+  inventario:
+    build:
+      context: Microservicio-inventario
+    ports:
+      - "8081:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-inventario:5432/ecommerce_inventario
+      - SPRING_DATASOURCE_USERNAME=Solus
+      - SPRING_DATASOURCE_PASSWORD=123456
+    depends_on:
+      - db-inventario
+    networks:
+      - my_network
+
+  venta:
+    build:
+      context: Microservicio-venta
+    ports:
+      - "8082:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-venta:5432/ecommerce_venta     
+      - SPRING_DATASOURCE_USERNAME=Solus  
+      - SPRING_DATASOURCE_PASSWORD=123456  
+    depends_on:
+      - db-venta
+    networks:
+      - my_network
+
+  db-inventario:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=ecommerce_inventario
+      - POSTGRES_USER=Solus
+      - POSTGRES_PASSWORD=123456
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-data-inventario:/var/lib/postgresql/data
+    networks:
+      - my_network
+
+  db-venta:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=ecommerce_venta
+      - POSTGRES_USER=Solus
+      - POSTGRES_PASSWORD=123456
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres-data-venta:/var/lib/postgresql/data
+    networks:
+      - my_network
+
+volumes:
+  postgres-data-inventario:
+  postgres-data-venta:
+
+networks:
+  my_network:
+    driver: bridge

@@ -1,13 +1,13 @@
 # Proyecto de Software 2: `Ecommerce`
 
-* El proyecto es un Ecomerce para una tienda de ropa al por menor para ello el proyecto se estructuro en:
+* El proyecto es un Ecomerce para una tienda de ropa al por menor para ello el proyecto esta dividido en:
 
     * [**Backend**](/Backend/)
     * **Frontend**
 
     ## Arquitectura
 
-    * ![Diagrama Arquitectura](/Diagramas/UML/Arquitectura/Arquitectura.png)
+    ![Diagrama Arquitectura](/Diagramas/UML/Arquitectura/Arquitectura.png)
 
 
     ## Despliege

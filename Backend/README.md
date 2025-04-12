@@ -4,7 +4,7 @@
 
     * [**Inventario**](/Backend/Microservicio-inventario/)
     * [**Venta**](/Backend/Microservicio-ventas/)
-    * **Pedidos**
+    * [**Pedidos**](/Backend/Microservicio-pedido/)
     * **Carrito de Compra**
     * **Reporte**
 
@@ -15,12 +15,18 @@
 
     * **Inventario**
 
-        * ![Inventario](/Diagramas/DB/Inventario.png)
+        ![Inventario](/Diagramas/DB/Inventario.png)
     
     * **Ventas**
 
-        * ![Venta](/Diagramas/DB/Ventas.png)
+        ![Venta](/Diagramas/DB/Ventas.png)
 
     * **Pedidos**
 
-        * ![Pedido](/Diagramas/DB/Pedidos.png)
+        ![Pedido](/Diagramas/DB/Pedidos.png)
+    
+    ## Diagrama de Actividades
+
+    * El proceso de realizacion de un pedido esta dado por el diagrama:
+
+        ![Actividades](/Diagramas/UML/Actividades/Pedidos.png)

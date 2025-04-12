@@ -1,11 +1,10 @@
 package com.ecommerce.venta.model.dto.detalleventa;
 
-import com.ecommerce.venta.model.dto.precio.PrecioResponseDTO;
 import com.ecommerce.venta.model.dto.producto.ProductoResponseDTO;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-public class DetalleVentaResposeDTO {
+public class DetalleVentaResponseDTO {
 
     @NotNull
     private ProductoResponseDTO producto;
@@ -16,8 +15,8 @@ public class DetalleVentaResposeDTO {
     @Positive
     private Double precioTotal;
 
-    public DetalleVentaResposeDTO(){}
-    public DetalleVentaResposeDTO(ProductoResponseDTO producto, Integer cantidad, Double precioTotal){
+    public DetalleVentaResponseDTO(){}
+    public DetalleVentaResponseDTO(ProductoResponseDTO producto, Integer cantidad, Double precioTotal){
         this.producto = producto;
         this.cantidad = cantidad;
         this.precioTotal = precioTotal;

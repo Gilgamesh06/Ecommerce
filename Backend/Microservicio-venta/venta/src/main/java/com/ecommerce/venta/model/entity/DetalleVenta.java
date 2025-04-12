@@ -14,7 +14,7 @@ public class DetalleVenta {
     @JoinColumn(name = "venta_id")
     private Venta venta;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
 

@@ -2,13 +2,14 @@ package com.ecommerce.venta.service.impl;
 
 import com.ecommerce.venta.model.dto.carrito.CarritoResponseDTO;
 import com.ecommerce.venta.model.dto.detalleventa.DetalleVentaAddDTO;
-import com.ecommerce.venta.model.dto.detalleventa.DetalleVentaResposeDTO;
+import com.ecommerce.venta.model.dto.detalleventa.DetalleVentaResponseDTO;
 import com.ecommerce.venta.model.dto.inventario.InventarioResponseDTO;
+import com.ecommerce.venta.model.dto.pedido.PedidoAddDTO;
 import com.ecommerce.venta.model.dto.venta.VentaResponseDTO;
 import com.ecommerce.venta.model.entity.Producto;
 import com.ecommerce.venta.model.entity.Venta;
 import com.ecommerce.venta.repository.VentaRepository;
-import com.ecommerce.venta.service.component.ProductoProducer;
+import com.ecommerce.venta.service.component.VentaProducer;
 import com.ecommerce.venta.service.component.ValidationProduct;
 import com.ecommerce.venta.service.connect.InventarioClient;
 import jakarta.transaction.Transactional;
@@ -28,21 +29,21 @@ public class VentaService {
     private final ValidationProduct validationProduct;
     private final ProductoService productoService;
     private final DetalleVentaService detalleVentaService;
-    private final ProductoProducer productoProducer;
+    private final VentaProducer ventaProducer;
 
     public VentaService(VentaRepository ventaRepository, InventarioClient inventarioClient,
                         ValidationProduct validationProduct, ProductoService productoService,
-                        DetalleVentaService detalleVentaService, ProductoProducer productoProducer){
+                        DetalleVentaService detalleVentaService, VentaProducer ventaProducer){
         this.ventaRepository = ventaRepository;
         this.inventarioClient = inventarioClient;
         this.validationProduct = validationProduct;
         this.productoService = productoService;
         this.detalleVentaService = detalleVentaService;
-        this.productoProducer = productoProducer;
+        this.ventaProducer = ventaProducer;
     }
 
 
-    private VentaResponseDTO converVentaResponseDTO(Venta venta, List<DetalleVentaResposeDTO> detalleVenta){
+    private VentaResponseDTO converVentaResponseDTO(Venta venta, List<DetalleVentaResponseDTO> detalleVenta){
         VentaResponseDTO ventaResponseDTO = new VentaResponseDTO();
         ventaResponseDTO.setReferencia(venta.getReferencia());
         ventaResponseDTO.setDocumentoCliente(venta.getDocumentoCliente());
@@ -82,13 +83,14 @@ public class VentaService {
         return detalleVentaAddDTOS;
     }
 
-    private List<DetalleVentaResposeDTO> guardarDetalleVenta(List<DetalleVentaAddDTO> detalleVentaAddDTOS){
+
+    private List<DetalleVentaResponseDTO> guardarDetalleVenta(List<DetalleVentaAddDTO> detalleVentaAddDTOS){
         return this.detalleVentaService.addDetalleVenta(detalleVentaAddDTOS);
     }
 
-    private Double calcularValorVenta(List<DetalleVentaResposeDTO> detalleVentaResposeDTOS ){
+    private Double calcularValorVenta(List<DetalleVentaResponseDTO> detalleVentaResposeDTOS ){
         return  detalleVentaResposeDTOS.stream()
-                .mapToDouble(DetalleVentaResposeDTO::getPrecioTotal)
+                .mapToDouble(DetalleVentaResponseDTO::getPrecioTotal)
                 .sum();
     }
 
@@ -100,6 +102,12 @@ public class VentaService {
         return  this.ventaRepository.save(venta);
     }
 
+    private PedidoAddDTO converPedidoAddDTO(Venta venta){
+        PedidoAddDTO pedidoAddDTO = new PedidoAddDTO();
+        pedidoAddDTO.setReferencia(venta.getReferencia());
+        pedidoAddDTO.setPrecioTotal(venta.getValorVenta());
+        return pedidoAddDTO;
+    }
 
     public Optional<VentaResponseDTO> addElement(List<CarritoResponseDTO> carritoResponseDTOs){
             List<Long> productIds = obtenerIds(carritoResponseDTOs);
@@ -111,12 +119,54 @@ public class VentaService {
                 List<Producto> productos = this.productoService.RetornarProductosVenta(productosInventario);
                 Venta venta = crearVenta();
                 List<DetalleVentaAddDTO> detalleVentaAddDTOS = crearDetalleVenta(venta,carritoResponseDTOs,productosInventario);
-                List<DetalleVentaResposeDTO> detalleVentaResposeDTOS = guardarDetalleVenta(detalleVentaAddDTOS);
+                List<DetalleVentaResponseDTO> detalleVentaResposeDTOS = guardarDetalleVenta(detalleVentaAddDTOS);
                 Double valorVenta = calcularValorVenta(detalleVentaResposeDTOS);
                 venta = actualizarVenta(venta,valorVenta);
-                this.productoProducer.sendUpdateProduct(carritoResponseDTOs);
+                PedidoAddDTO pedidoAddDTO = converPedidoAddDTO(venta);
+                this.ventaProducer.sendAddPedido(pedidoAddDTO);
+                this.ventaProducer.sendUpdateProduct(carritoResponseDTOs);
                 return Optional.of(converVentaResponseDTO(venta,detalleVentaResposeDTOS));
             }
             return ventaResponseOpt;
     }
+
+    private Optional<Venta> searchVentaWithReferencia(String referencia){
+        return  this.ventaRepository.findByReferencia(referencia);
+    }
+
+    // Obtener los detalle de una venta
+    public List<DetalleVentaResponseDTO> obtenerDetalles(String referencia){
+        Optional<Venta> ventaOpt = searchVentaWithReferencia(referencia);
+        if(ventaOpt.isPresent()){
+            Long id = ventaOpt.get().getId();
+            return this.detalleVentaService.getDetalleVenta(id);
+        }
+        return new ArrayList<>();
+    }
+
+    private List<Venta> getAll(){
+        return this.ventaRepository.findAll();
+    }
+
+    // Obtener todas las ventas
+    public List<VentaResponseDTO> getAllPedidos(){
+        List<Venta> ventas = getAll();
+        List<VentaResponseDTO> ventaResponseDTOS = new ArrayList<>();
+        for(Venta venta : ventas){
+            List<DetalleVentaResponseDTO> detalleVentaResposeDTOS = obtenerDetalles(venta.getReferencia());
+            VentaResponseDTO  ventaResponseDTO = converVentaResponseDTO(venta,detalleVentaResposeDTOS);
+            ventaResponseDTOS.add(ventaResponseDTO);
+        }
+        return  ventaResponseDTOS;
+    }
+
+    public List<List<DetalleVentaResponseDTO>> obtenerAllDetalles(List<String> referencia){
+        List<List<DetalleVentaResponseDTO>> listDetallesVenta = new ArrayList<>();
+        for(String ref: referencia){
+            List<DetalleVentaResponseDTO> detalleVentaResposeDTOS = obtenerDetalles(ref);
+            listDetallesVenta.add(detalleVentaResposeDTOS);
+        }
+        return  listDetallesVenta;
+    }
+
 }

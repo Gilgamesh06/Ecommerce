@@ -1,7 +1,7 @@
 package com.ecommerce.venta.service.impl;
 
 import com.ecommerce.venta.model.dto.detalleventa.DetalleVentaAddDTO;
-import com.ecommerce.venta.model.dto.detalleventa.DetalleVentaResposeDTO;
+import com.ecommerce.venta.model.dto.detalleventa.DetalleVentaResponseDTO;
 import com.ecommerce.venta.model.dto.producto.ProductoResponseDTO;
 import com.ecommerce.venta.model.entity.DetalleVenta;
 import com.ecommerce.venta.model.entity.Precio;
@@ -29,9 +29,20 @@ public class DetalleVentaService {
         this.productoService = productoService;
     }
 
-    public DetalleVentaResposeDTO converDetalleVentaResponseDTO(DetalleVenta detalleVenta){
+    private List<DetalleVenta> findDetalleVenta(Long id){
+        return this.detalleVentaRepository.findAllByVentaId(id);
+    }
+
+    public List<DetalleVentaResponseDTO> getDetalleVenta(Long id){
+        List<DetalleVenta> detalleVentas = findDetalleVenta(id);
+        return detalleVentas.stream()
+                .map(this::converDetalleVentaResponseDTO)
+                .toList();
+    }
+
+    public DetalleVentaResponseDTO converDetalleVentaResponseDTO(DetalleVenta detalleVenta){
         ProductoResponseDTO producto = this.productoService.convertProductoResposeDTO(detalleVenta.getProducto());
-        DetalleVentaResposeDTO detalleVentaResposeDTO = new DetalleVentaResposeDTO();
+        DetalleVentaResponseDTO detalleVentaResposeDTO = new DetalleVentaResponseDTO();
         detalleVentaResposeDTO.setProducto(producto);
         detalleVentaResposeDTO.setCantidad(detalleVenta.getCantidad());
         detalleVentaResposeDTO.setPrecioTotal(detalleVenta.getPrecioTotal());
@@ -56,8 +67,8 @@ public class DetalleVentaService {
 
 
         @Transactional
-        public List<DetalleVentaResposeDTO> addDetalleVenta(List<DetalleVentaAddDTO> detalleVentaAddDTOs){
-        List<DetalleVentaResposeDTO> detalleVentaResposeDTOS = new ArrayList<>();
+        public List<DetalleVentaResponseDTO> addDetalleVenta(List<DetalleVentaAddDTO> detalleVentaAddDTOs){
+        List<DetalleVentaResponseDTO> detalleVentaResposeDTOS = new ArrayList<>();
         for(DetalleVentaAddDTO detalleVentaAddDTO: detalleVentaAddDTOs){
             Optional<Precio> precioOpt =this.precioService.getPrecio(detalleVentaAddDTO.getProducto().getId());
             if(precioOpt.isPresent()){

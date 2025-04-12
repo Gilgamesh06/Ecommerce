@@ -37,5 +37,4 @@ public class InventarioClient {
         return responseEntity.getBody();
     }
 
-
 }

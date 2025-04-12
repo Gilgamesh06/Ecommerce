@@ -18,6 +18,15 @@ chmod +x mvnw
 # Ejecutar mvnw
 ./mvnw package
 
+# Cambiar al directorio del microservicio de pedido
+cd ../../Microservicio-pedido/pedido || exit
+
+# Dar permisos de ejecución al script mvnw
+chmod +x mvnw
+
+# Ejecutar mvnw
+./mvnw package
+
 # Volver al directorio anterior
 cd ../../ || exit
  

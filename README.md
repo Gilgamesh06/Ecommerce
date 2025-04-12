@@ -7,7 +7,7 @@
 
     ## Arquitectura
 
-    * ![Diagrama Arquitectura](/Diagramas/UML/Diseño/Backend_diseño.png)
+    * ![Diagrama Arquitectura](/Diagramas/UML/Diseño/Diseño.png)
 
 
     ## Despliege

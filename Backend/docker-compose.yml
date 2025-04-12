@@ -10,8 +10,13 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db-inventario:5432/ecommerce_inventario
       - SPRING_DATASOURCE_USERNAME=Solus
       - SPRING_DATASOURCE_PASSWORD=123456
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=admin
+      - SPRING_RABBITMQ_PASSWORD=123456
     depends_on:
       - db-inventario
+      - rabbitmq
     networks:
       - my_network
 
@@ -23,9 +28,14 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db-venta:5432/ecommerce_venta     
       - SPRING_DATASOURCE_USERNAME=Solus  
-      - SPRING_DATASOURCE_PASSWORD=123456  
+      - SPRING_DATASOURCE_PASSWORD=123456
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=admin
+      - SPRING_RABBITMQ_PASSWORD=123456
     depends_on:
       - db-venta
+      - rabbitmq
     networks:
       - my_network
 
@@ -55,6 +65,17 @@ services:
     networks:
       - my_network
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: 123456
+    networks:
+      - my_network
+      
 volumes:
   postgres-data-inventario:
   postgres-data-venta:

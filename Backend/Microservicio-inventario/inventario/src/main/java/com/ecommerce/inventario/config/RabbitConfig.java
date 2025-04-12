@@ -16,11 +16,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig {
 
-    private static final String EXCHANGE_NAME = "productoExchange";
+    private static final String EXCHANGE_NAME = "ecommerceExchange";
 
     // Para actualizar cantidad de un producto
     public static final String UPDATE_ROUTING_KEY = "updateCantidad.key";
-    public static final String UPDATE_QUEUE_NAME = "productoQueueCantidadUpdate";
+    public static final String UPDATE_QUEUE_NAME = "productoCantidadQueueUpdate";
 
     // Declarar cola para actualizar cantidad
     @Bean
@@ -30,14 +30,14 @@ public class RabbitConfig {
 
     // Declarar el exchange DirectExchange
     @Bean
-    public DirectExchange productoExchange() {
+    public DirectExchange ecommerceExchange() {
         return new DirectExchange(EXCHANGE_NAME);
     }
 
     // Binding para la cola de actualizar cantidad
     @Bean
-    public Binding bindingUpdateQueue(Queue updateQueue, DirectExchange productoExchange) {
-        return BindingBuilder.bind(updateQueue).to(productoExchange).with(UPDATE_ROUTING_KEY);
+    public Binding bindingUpdateQueue(Queue updateQueue, DirectExchange ecommerceExchange) {
+        return BindingBuilder.bind(updateQueue).to(ecommerceExchange).with(UPDATE_ROUTING_KEY);
     }
 
     @Value("${spring.rabbitmq.host}")

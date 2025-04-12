@@ -24,7 +24,7 @@ public class ProductoConsumer {
 
     // Metodo para actualizar cantidad de productos al realizar una venta
     @RabbitListener(queues = RabbitConfig.UPDATE_QUEUE_NAME)
-    public void actualizarLibro(List<CarritoResponseDTO> carritoResponseDTOS){
+    public void actualizarProducto(List<CarritoResponseDTO> carritoResponseDTOS){
         try{
             this.inventarioService.updateInventario(carritoResponseDTOS);
             logger.info("Cantidad de productos actualizada");

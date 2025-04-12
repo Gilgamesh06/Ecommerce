@@ -5,10 +5,6 @@
   },
   "item": [
     {
-      "name": "bruno",
-      "event": []
-    },
-    {
       "name": "Inventario",
       "item": [
         {
@@ -220,7 +216,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"cantidad\": 20,\n    \"productoAddDTO\": {\n        \"referencia\": \"REF005\",\n        \"nombre\": \"Gorra de Beisbol\",\n        \"talla\": \"Única\",\n        \"tipo\": \"Accesorios\",\n        \"subtipo\": \"Gorra\",\n        \"target\": \"Unisex\",\n        \"color\": \"Verde\",\n        \"precioUnid\": 15.00,\n        \"precioVenta\": 20.00,\n        \"detalleProductoAddDTO\": {\n            \"descripcion\": \"Gorra ajustable con visera.\",\n            \"composicion\": \"100% algodón\",\n            \"pais\": \"México\"\n        }\n    }\n}\n",
+                  "raw": "{\n    \"cantidad\": 20,\n    \"productoAddDTO\": {\n        \"referencia\": \"REF005\",\n        \"nombre\": \"Gorra de Beisbol\",\n        \"talla\": \"unica\",\n        \"tipo\": \"Accesorios\",\n        \"subtipo\": \"Gorra\",\n        \"target\": \"Unisex\",\n        \"color\": \"Verde\",\n        \"precioUnid\": 15.00,\n        \"precioVenta\": 20.00,\n        \"detalleProductoAddDTO\": {\n            \"descripcion\": \"Gorra ajustable con visera.\",\n            \"composicion\": \"100% algodón\",\n            \"pais\": \"México\"\n        }\n    }\n}\n",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -498,33 +494,6 @@
           "name": "Listar",
           "item": [
             {
-              "name": "Listar Todo Inventario",
-              "event": [],
-              "request": {
-                "method": "GET",
-                "header": [],
-                "auth": {
-                  "type": "noauth"
-                },
-                "description": "",
-                "url": {
-                  "raw": "http://localhost:8081/api/v1/inventario/listar-todos",
-                  "protocol": "http",
-                  "host": [
-                    "localhost:8081"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "inventario",
-                    "listar-todos"
-                  ],
-                  "query": [],
-                  "variable": []
-                }
-              }
-            },
-            {
               "name": "Listar Ids",
               "event": [],
               "request": {
@@ -566,6 +535,33 @@
                   }
                 }
               }
+            },
+            {
+              "name": "Listar Todo Inventario",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/listar-todos",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "listar-todos"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
             }
           ]
         }
@@ -575,8 +571,94 @@
       "name": "Venta",
       "item": [
         {
-          "name": "Crear Venta",
+          "name": "Agregar",
           "item": [
+            {
+              "name": "Venta 2",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8082/api/v1/ventas/realiza-venta",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8082"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "ventas",
+                    "realiza-venta"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"productoId\":2,\n    \"cantidad\":1\n  },\n  {\n    \"productoId\":4,\n    \"cantidad\":2   \n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Venta 3",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8082/api/v1/ventas/realiza-venta",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8082"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "ventas",
+                    "realiza-venta"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"productoId\":4,\n    \"cantidad\":1\n  },\n  {\n    \"productoId\":1,\n    \"cantidad\":2   \n  },\n  {\n    \"productoId\":5,\n    \"cantidad\":3\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
             {
               "name": "Venta 1",
               "event": [],
@@ -617,6 +699,163 @@
                       "language": "json"
                     }
                   }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Listar",
+          "item": [
+            {
+              "name": "Listar Todo",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8082/api/v1/ventas/listar-ventas",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8082"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "ventas",
+                    "listar-ventas"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pedido",
+      "item": [
+        {
+          "name": "Listar",
+          "item": [
+            {
+              "name": "Listar Simple",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8083/api/v1/pedido/listar-pedidos",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8083"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "pedido",
+                    "listar-pedidos"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Listar Completo",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8083/api/v1/pedido/listar-completo",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8083"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "pedido",
+                    "listar-completo"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Buscar",
+          "item": [
+            {
+              "name": "Referencia 1",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8083/api/v1/pedido/listar/REF-1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8083"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "pedido",
+                    "listar",
+                    "REF-1"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Referencia 2",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8083/api/v1/pedido/listar/REF-2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8083"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "pedido",
+                    "listar",
+                    "REF-2"
+                  ],
+                  "query": [],
+                  "variable": []
                 }
               }
             }

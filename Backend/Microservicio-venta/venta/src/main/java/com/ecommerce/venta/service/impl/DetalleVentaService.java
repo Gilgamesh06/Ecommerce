@@ -2,13 +2,13 @@ package com.ecommerce.venta.service.impl;
 
 import com.ecommerce.venta.model.dto.detalleventa.DetalleVentaAddDTO;
 import com.ecommerce.venta.model.dto.detalleventa.DetalleVentaResposeDTO;
-import com.ecommerce.venta.model.dto.producto.ProductoAddDTO;
 import com.ecommerce.venta.model.dto.producto.ProductoResponseDTO;
 import com.ecommerce.venta.model.entity.DetalleVenta;
 import com.ecommerce.venta.model.entity.Precio;
 import com.ecommerce.venta.model.entity.Producto;
 import com.ecommerce.venta.model.entity.Venta;
 import com.ecommerce.venta.repository.DetalleVentaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -55,6 +55,7 @@ public class DetalleVentaService {
     }
 
 
+        @Transactional
         public List<DetalleVentaResposeDTO> addDetalleVenta(List<DetalleVentaAddDTO> detalleVentaAddDTOs){
         List<DetalleVentaResposeDTO> detalleVentaResposeDTOS = new ArrayList<>();
         for(DetalleVentaAddDTO detalleVentaAddDTO: detalleVentaAddDTOs){

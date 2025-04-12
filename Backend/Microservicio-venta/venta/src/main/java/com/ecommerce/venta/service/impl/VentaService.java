@@ -8,8 +8,10 @@ import com.ecommerce.venta.model.dto.venta.VentaResponseDTO;
 import com.ecommerce.venta.model.entity.Producto;
 import com.ecommerce.venta.model.entity.Venta;
 import com.ecommerce.venta.repository.VentaRepository;
+import com.ecommerce.venta.service.component.ProductoProducer;
 import com.ecommerce.venta.service.component.ValidationProduct;
 import com.ecommerce.venta.service.connect.InventarioClient;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,15 +28,17 @@ public class VentaService {
     private final ValidationProduct validationProduct;
     private final ProductoService productoService;
     private final DetalleVentaService detalleVentaService;
+    private final ProductoProducer productoProducer;
 
     public VentaService(VentaRepository ventaRepository, InventarioClient inventarioClient,
                         ValidationProduct validationProduct, ProductoService productoService,
-                        DetalleVentaService detalleVentaService){
+                        DetalleVentaService detalleVentaService, ProductoProducer productoProducer){
         this.ventaRepository = ventaRepository;
         this.inventarioClient = inventarioClient;
         this.validationProduct = validationProduct;
         this.productoService = productoService;
         this.detalleVentaService = detalleVentaService;
+        this.productoProducer = productoProducer;
     }
 
 
@@ -49,33 +53,68 @@ public class VentaService {
         return ventaResponseDTO;
     }
 
+    private List<Long> obtenerIds(List<CarritoResponseDTO> carritoResponseDTO){
+        return carritoResponseDTO.stream()
+                .map(CarritoResponseDTO::getProductoId)
+                .toList();
+
+    }
+
+    private List<InventarioResponseDTO> obtenerPorductosInventario(List<Long> productIds){
+        return this.inventarioClient.getProducts(productIds);
+    }
+
+    @Transactional
+    private Venta crearVenta(){
+        Venta venta = new Venta();
+        venta.setFecha(LocalDateTime.now());
+        return this.ventaRepository.save(venta);
+    }
+    private List<DetalleVentaAddDTO> crearDetalleVenta(Venta venta, List<CarritoResponseDTO> carritoResponseDTOs,
+                                                       List<InventarioResponseDTO> productosInventario){
+        List<Producto> productos = this.productoService.RetornarProductosVenta(productosInventario);
+        List<DetalleVentaAddDTO> detalleVentaAddDTOS = new ArrayList<>();
+        for(int i = 0; i< productos.size() ; i++ ){
+            detalleVentaAddDTOS.add(this.detalleVentaService.convertDetalleVentaDTO(venta,
+                    productos.get(i),
+                    carritoResponseDTOs.get(i).getCantidad()));
+        }
+        return detalleVentaAddDTOS;
+    }
+
+    private List<DetalleVentaResposeDTO> guardarDetalleVenta(List<DetalleVentaAddDTO> detalleVentaAddDTOS){
+        return this.detalleVentaService.addDetalleVenta(detalleVentaAddDTOS);
+    }
+
+    private Double calcularValorVenta(List<DetalleVentaResposeDTO> detalleVentaResposeDTOS ){
+        return  detalleVentaResposeDTOS.stream()
+                .mapToDouble(DetalleVentaResposeDTO::getPrecioTotal)
+                .sum();
+    }
+
+    @Transactional
+    private Venta actualizarVenta(Venta venta, Double valorVenta){
+        venta.setValorVenta(valorVenta);
+        venta.setEstado("Exitosa");
+        venta.setReferencia("REF-"+ venta.getId());
+        return  this.ventaRepository.save(venta);
+    }
+
+
     public Optional<VentaResponseDTO> addElement(List<CarritoResponseDTO> carritoResponseDTOs){
-            List<Long> productIds = carritoResponseDTOs.stream()
-                    .map(CarritoResponseDTO::getProductoId)
-                    .toList();
-            List<InventarioResponseDTO> productosInventario = this.inventarioClient.getProducts(productIds);
+            List<Long> productIds = obtenerIds(carritoResponseDTOs);
+            List<InventarioResponseDTO> productosInventario = obtenerPorductosInventario(productIds);
 
             Optional<VentaResponseDTO> ventaResponseOpt = Optional.empty();
 
             if(this.validationProduct.validarProductos(productosInventario,carritoResponseDTOs)){
                 List<Producto> productos = this.productoService.RetornarProductosVenta(productosInventario);
-                Venta venta = new Venta();
-                venta.setFecha(LocalDateTime.now());
-                venta.setEstado("Exitosa");
-                List<DetalleVentaAddDTO> detalleVentaAddDTOS = new ArrayList<>();
-                this.ventaRepository.save(venta);
-                for(int i = 0; i< productos.size() ; i++ ){
-                    detalleVentaAddDTOS.add(this.detalleVentaService.convertDetalleVentaDTO(venta,
-                            productos.get(i),
-                            carritoResponseDTOs.get(i).getCantidad()));
-                }
-                List<DetalleVentaResposeDTO> detalleVentaResposeDTOS = this.detalleVentaService.addDetalleVenta(detalleVentaAddDTOS);
-                Double valorTotal = detalleVentaResposeDTOS.stream()
-                        .mapToDouble(DetalleVentaResposeDTO::getPrecioTotal)
-                        .sum();
-                venta.setValorVenta(valorTotal);
-                venta.setReferencia("REF-"+ venta.getId());
-                this.ventaRepository.save(venta);
+                Venta venta = crearVenta();
+                List<DetalleVentaAddDTO> detalleVentaAddDTOS = crearDetalleVenta(venta,carritoResponseDTOs,productosInventario);
+                List<DetalleVentaResposeDTO> detalleVentaResposeDTOS = guardarDetalleVenta(detalleVentaAddDTOS);
+                Double valorVenta = calcularValorVenta(detalleVentaResposeDTOS);
+                venta = actualizarVenta(venta,valorVenta);
+                this.productoProducer.sendUpdateProduct(carritoResponseDTOs);
                 return Optional.of(converVentaResponseDTO(venta,detalleVentaResposeDTOS));
             }
             return ventaResponseOpt;

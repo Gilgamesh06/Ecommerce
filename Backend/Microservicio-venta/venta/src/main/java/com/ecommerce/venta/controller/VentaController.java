@@ -21,9 +21,9 @@ public class VentaController {
     }
 
     @PostMapping("/realiza-venta")
-    public ResponseEntity<VentaResponseDTO> makeSale(@RequestBody List<CarritoResponseDTO> carritoResponseDTO){
+    public ResponseEntity<VentaResponseDTO> makeSale(@RequestBody List<CarritoResponseDTO> carritoResponseDTOs){
 
-        Optional<VentaResponseDTO> ventaResponseOpt = this.ventaService.addElement(carritoResponseDTO);
+        Optional<VentaResponseDTO> ventaResponseOpt = this.ventaService.addElement(carritoResponseDTOs);
         return ventaResponseOpt.map(ventaResponseDTO -> new ResponseEntity<>(ventaResponseDTO, HttpStatus.CREATED)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

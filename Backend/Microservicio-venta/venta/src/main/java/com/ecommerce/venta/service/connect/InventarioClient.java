@@ -2,7 +2,6 @@ package com.ecommerce.venta.service.connect;
 
 import com.ecommerce.venta.model.dto.inventario.InventarioResponseDTO;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -37,4 +36,6 @@ public class InventarioClient {
         );
         return responseEntity.getBody();
     }
+
+
 }

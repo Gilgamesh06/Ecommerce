@@ -6,6 +6,7 @@ import com.ecommerce.venta.model.dto.precio.PrecioResponseDTO;
 import com.ecommerce.venta.model.entity.Producto;
 import com.ecommerce.venta.repository.PrecioRepository;
 import com.ecommerce.venta.service.interfaces.GetAndSave;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -68,6 +69,7 @@ public class PrecioService implements GetAndSave<Precio, PrecioResponseDTO, Prec
         return precioExistente;
     }
 
+    @Transactional
     private Precio crearNuevoPrecio(PrecioAddDTO addPrecio) {
         Precio nuevoPrecio = new Precio();
         nuevoPrecio.setPrecioUnid(addPrecio.getPrecioUnid());

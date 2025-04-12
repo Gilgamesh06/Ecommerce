@@ -9,6 +9,7 @@ import com.ecommerce.venta.model.entity.Precio;
 import com.ecommerce.venta.model.entity.Producto;
 import com.ecommerce.venta.repository.ProductoRepository;
 import com.ecommerce.venta.service.interfaces.GetAndSave;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -57,6 +58,7 @@ public class ProductoService implements GetAndSave<Producto, ProductoResponseDTO
                 .toList();
     }
 
+    @Transactional
     public Producto addProducto(ProductoAddDTO productoAddDTO){
         Producto producto = new Producto();
         producto.setNombre(productoAddDTO.getNombre());

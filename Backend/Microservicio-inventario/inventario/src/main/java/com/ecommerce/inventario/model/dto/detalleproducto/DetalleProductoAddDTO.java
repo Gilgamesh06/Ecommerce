@@ -1,4 +1,4 @@
-package com.ecommerce.inventario.model.dto;
+package com.ecommerce.inventario.model.dto.detalleproducto;
 
 import jakarta.validation.constraints.NotBlank;
 

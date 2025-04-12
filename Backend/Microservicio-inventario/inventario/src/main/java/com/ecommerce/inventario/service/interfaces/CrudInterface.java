@@ -1,7 +1,5 @@
 package com.ecommerce.inventario.service.interfaces;
 
-import com.ecommerce.inventario.model.dto.ProductoSearchDTO;
-
 import java.util.List;
 import java.util.Optional;
 

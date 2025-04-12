@@ -1,6 +1,6 @@
-package com.ecommerce.inventario.model.dto;
+package com.ecommerce.inventario.model.dto.producto;
 
-import jakarta.persistence.Column;
+import com.ecommerce.inventario.model.dto.detalleproducto.DetalleProductoAddDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

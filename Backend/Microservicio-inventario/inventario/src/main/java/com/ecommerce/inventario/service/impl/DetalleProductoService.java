@@ -1,6 +1,6 @@
 package com.ecommerce.inventario.service.impl;
 
-import com.ecommerce.inventario.model.dto.DetalleProductoAddDTO;
+import com.ecommerce.inventario.model.dto.detalleproducto.DetalleProductoAddDTO;
 import com.ecommerce.inventario.model.entity.DetalleProducto;
 import com.ecommerce.inventario.repository.DetalleProductoRepository;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,8 @@
 package com.ecommerce.inventario.controller;
 
-import com.ecommerce.inventario.model.dto.InventarioAddDTO;
-import com.ecommerce.inventario.model.dto.InventarioResponseDTO;
-import com.ecommerce.inventario.model.dto.ProductoSearchDTO;
+import com.ecommerce.inventario.model.dto.inventario.InventarioAddDTO;
+import com.ecommerce.inventario.model.dto.inventario.InventarioResponseDTO;
+import com.ecommerce.inventario.model.dto.producto.ProductoSearchDTO;
 import com.ecommerce.inventario.service.impl.InventarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

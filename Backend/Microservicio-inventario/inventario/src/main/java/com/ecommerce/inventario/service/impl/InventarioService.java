@@ -1,13 +1,15 @@
 package com.ecommerce.inventario.service.impl;
 
-import com.ecommerce.inventario.model.dto.InventarioAddDTO;
-import com.ecommerce.inventario.model.dto.InventarioResponseDTO;
-import com.ecommerce.inventario.model.dto.ProductoInfoDTO;
-import com.ecommerce.inventario.model.dto.ProductoSearchDTO;
+import com.ecommerce.inventario.model.dto.carrito.CarritoResponseDTO;
+import com.ecommerce.inventario.model.dto.inventario.InventarioAddDTO;
+import com.ecommerce.inventario.model.dto.inventario.InventarioResponseDTO;
+import com.ecommerce.inventario.model.dto.producto.ProductoInfoDTO;
+import com.ecommerce.inventario.model.dto.producto.ProductoSearchDTO;
 import com.ecommerce.inventario.model.entity.Inventario;
 import com.ecommerce.inventario.model.entity.Producto;
 import com.ecommerce.inventario.repository.InventarioRepository;
 import com.ecommerce.inventario.service.interfaces.CrudInterface;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -59,6 +61,7 @@ public class InventarioService implements CrudInterface<Inventario,InventarioRes
                 .toList();
     }
 
+    @Transactional
     public InventarioResponseDTO addElement(InventarioAddDTO inventarioAddDTO){
         Producto producto = this.productoService.addProduct(inventarioAddDTO.getProductoAddDTO());
         Inventario inventario = new Inventario();
@@ -68,10 +71,42 @@ public class InventarioService implements CrudInterface<Inventario,InventarioRes
         return convetiddorInventarioResponseDTO(inventario);
     }
 
+    private List<Inventario> getInventario(List<Long> ids){
+        return this.inventarioRepository.findAllByProductoIdIn(ids);
+    }
+
     public List<InventarioResponseDTO> getProducts(List<Long> ids){
-       List<Inventario> inventarios = this.inventarioRepository.findAllByProductoIdIn(ids);
+       List<Inventario> inventarios = getInventario(ids);
        return inventarios.stream()
                .map(this::convetiddorInventarioResponseDTO)
                .toList();
     }
+
+    private List<Long> obtenerProductsIds(List<CarritoResponseDTO> carritoResponseDTOS){
+        return carritoResponseDTOS.stream()
+                .map(CarritoResponseDTO::getProductoId)
+                .toList();
+    }
+
+
+
+    private List<Inventario> updateCantidad(List<CarritoResponseDTO> carritoResponseDTOS){
+        List<Long> productIds = obtenerProductsIds(carritoResponseDTOS);
+        List<Inventario> inventarios = getInventario(productIds);
+        for( int i = 0; i< inventarios.size(); i++){
+            int cantidad = inventarios.get(i).getCantidad() - carritoResponseDTOS.get(i).getCantidad();
+            inventarios.get(i).setCantidad(cantidad);
+        }
+        return inventarios;
+    }
+
+    @Transactional
+    public void updateInventario(List<CarritoResponseDTO> carritoResponseDTOS){
+        List<Inventario> inventarios = updateCantidad(carritoResponseDTOS);
+        for (Inventario inventario : inventarios) {
+            this.inventarioRepository.save(inventario);
+        }
+    }
+
+
 }

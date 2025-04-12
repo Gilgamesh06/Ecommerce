@@ -1,8 +1,8 @@
 package com.ecommerce.inventario.service.impl;
 
-import com.ecommerce.inventario.model.dto.ProductoAddDTO;
-import com.ecommerce.inventario.model.dto.ProductoResponseDTO;
-import com.ecommerce.inventario.model.dto.ProductoSearchDTO;
+import com.ecommerce.inventario.model.dto.producto.ProductoAddDTO;
+import com.ecommerce.inventario.model.dto.producto.ProductoResponseDTO;
+import com.ecommerce.inventario.model.dto.producto.ProductoSearchDTO;
 import com.ecommerce.inventario.model.entity.DetalleProducto;
 import com.ecommerce.inventario.model.entity.Producto;
 import com.ecommerce.inventario.repository.ProductoRepository;
@@ -60,6 +60,7 @@ public class ProductoService implements CrudInterface<Producto,ProductoResponseD
                 .toList();
     }
 
+    @Transactional
     public Producto addProduct(ProductoAddDTO productoAddDTO){
         DetalleProducto detalleProducto = this.detalleProductoService.addDetailProduct(productoAddDTO.getDetalleProductoAddDTO());
         Producto producto = Stream.of(productoAddDTO)
@@ -84,7 +85,6 @@ public class ProductoService implements CrudInterface<Producto,ProductoResponseD
     }
 
     @Override
-    @Transactional
     public ProductoResponseDTO addElement(ProductoAddDTO productoAddDTO) {
         Producto producto = addProduct(productoAddDTO);
         return convertProductoResponseDTO(producto);

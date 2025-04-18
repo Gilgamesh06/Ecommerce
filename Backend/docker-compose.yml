@@ -58,6 +58,18 @@ services:
     networks:
       - my_network
 
+  carrito:
+    build:
+      context: Microservicio-carrito
+    ports:
+      - "8084:8080"
+    environment:    
+      - SPRING_REDIS_HOST=redis-carrito  
+      - SPRING_REDIS_PORT=6379
+    depends_on:
+      - redis-carrito
+    networks:
+      - my_network
 
   db-inventario:
     image: postgres:14
@@ -98,6 +110,15 @@ services:
     networks:
       - my_network
 
+  redis-carrito:
+    image: redis:7.4
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - my_network
+
   rabbitmq:
     image: rabbitmq:3-management
     ports:
@@ -113,6 +134,7 @@ volumes:
   postgres-data-inventario:
   postgres-data-venta:
   postgres-data-pedido:
+  redis-data:
 
 networks:
   my_network:

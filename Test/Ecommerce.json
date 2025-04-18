@@ -5,6 +5,373 @@
   },
   "item": [
     {
+      "name": "Carrito",
+      "item": [
+        {
+          "name": "Start",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "http://localhost:8084/api/v1/carrito/iniciar",
+              "protocol": "http",
+              "host": [
+                "localhost:8084"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "carrito",
+                "iniciar"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "item": [
+            {
+              "name": "Producto 2",
+              "event": [],
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/agregar/2/3",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8084"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "carrito",
+                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "agregar",
+                    "2",
+                    "3"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Agregar",
+          "item": [
+            {
+              "name": "Producto 1",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/agregar/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8084"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "carrito",
+                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "agregar",
+                    "1"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"nombre\": \"Camisa Casual\",\n    \"talla\": \"M\",\n    \"precio\": 30.99,\n    \"cantidad\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Producto 2",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/agregar/2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8084"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "carrito",
+                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "agregar",
+                    "2"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"nombre\": \"Pantalón Deportivo\",\n    \"talla\": \"L\",\n    \"precio\": 40.00,\n    \"cantidad\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Producto 3",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/agregar/3",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8084"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "carrito",
+                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "agregar",
+                    "3"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nombre\": \"Zapatillas de Deporte\",\n  \"talla\": \"42\",\n  \"precio\": 70.00,\n  \"cantidad\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Comprar",
+          "item": [
+            {
+              "name": "Compra",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/comprar",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8084"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "carrito",
+                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "comprar"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Disminuir",
+          "item": [
+            {
+              "name": "Producto 1",
+              "event": [],
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/disminuir/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8084"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "carrito",
+                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "disminuir",
+                    "1"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Eliminar",
+          "item": [
+            {
+              "name": "Producto 3",
+              "event": [],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/eliminar/3",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8084"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "carrito",
+                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "eliminar",
+                    "3"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Incrementar",
+          "item": [
+            {
+              "name": "Producto 1",
+              "event": [],
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/aumentar/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8084"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "carrito",
+                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "aumentar",
+                    "1"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Listar",
+          "item": [
+            {
+              "name": "Listar Carrito",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8084"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "carrito",
+                    "fa57c212-3e57-4805-a245-ae16249f269e"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "Inventario",
       "item": [
         {
@@ -527,7 +894,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "[1,2,3]",
+                  "raw": "[1]",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -568,11 +935,179 @@
       ]
     },
     {
+      "name": "Pedido",
+      "item": [
+        {
+          "name": "Buscar",
+          "item": [
+            {
+              "name": "Referencia 1",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8083/api/v1/pedido/listar/REF-1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8083"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "pedido",
+                    "listar",
+                    "REF-1"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Referencia 2",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8083/api/v1/pedido/listar/REF-2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8083"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "pedido",
+                    "listar",
+                    "REF-2"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Listar",
+          "item": [
+            {
+              "name": "Listar Completo",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8083/api/v1/pedido/listar-completo",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8083"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "pedido",
+                    "listar-completo"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Listar Simple",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8083/api/v1/pedido/listar-pedidos",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8083"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "pedido",
+                    "listar-pedidos"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "Venta",
       "item": [
         {
           "name": "Agregar",
           "item": [
+            {
+              "name": "Venta 1",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8082/api/v1/ventas/realiza-venta",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8082"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "ventas",
+                    "realiza-venta"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"productoId\":1,\n    \"cantidad\":1\n  },\n  {\n    \"productoId\":2,\n    \"cantidad\":2   \n  },\n  {\n    \"productoId\":3,\n    \"cantidad\":3\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
             {
               "name": "Venta 2",
               "event": [],
@@ -658,49 +1193,6 @@
                   }
                 }
               }
-            },
-            {
-              "name": "Venta 1",
-              "event": [],
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "disabled": false,
-                    "type": "default"
-                  }
-                ],
-                "auth": {
-                  "type": "noauth"
-                },
-                "description": "",
-                "url": {
-                  "raw": "http://localhost:8082/api/v1/ventas/realiza-venta",
-                  "protocol": "http",
-                  "host": [
-                    "localhost:8082"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "ventas",
-                    "realiza-venta"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "[\n  {\n    \"productoId\":1,\n    \"cantidad\":1\n  },\n  {\n    \"productoId\":2,\n    \"cantidad\":2   \n  },\n  {\n    \"productoId\":3,\n    \"cantidad\":3\n  }\n]",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              }
             }
           ]
         },
@@ -728,131 +1220,6 @@
                     "v1",
                     "ventas",
                     "listar-ventas"
-                  ],
-                  "query": [],
-                  "variable": []
-                }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Pedido",
-      "item": [
-        {
-          "name": "Listar",
-          "item": [
-            {
-              "name": "Listar Simple",
-              "event": [],
-              "request": {
-                "method": "GET",
-                "header": [],
-                "auth": {
-                  "type": "noauth"
-                },
-                "description": "",
-                "url": {
-                  "raw": "http://localhost:8083/api/v1/pedido/listar-pedidos",
-                  "protocol": "http",
-                  "host": [
-                    "localhost:8083"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "pedido",
-                    "listar-pedidos"
-                  ],
-                  "query": [],
-                  "variable": []
-                }
-              }
-            },
-            {
-              "name": "Listar Completo",
-              "event": [],
-              "request": {
-                "method": "GET",
-                "header": [],
-                "auth": {
-                  "type": "noauth"
-                },
-                "description": "",
-                "url": {
-                  "raw": "http://localhost:8083/api/v1/pedido/listar-completo",
-                  "protocol": "http",
-                  "host": [
-                    "localhost:8083"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "pedido",
-                    "listar-completo"
-                  ],
-                  "query": [],
-                  "variable": []
-                }
-              }
-            }
-          ]
-        },
-        {
-          "name": "Buscar",
-          "item": [
-            {
-              "name": "Referencia 1",
-              "event": [],
-              "request": {
-                "method": "GET",
-                "header": [],
-                "auth": {
-                  "type": "noauth"
-                },
-                "description": "",
-                "url": {
-                  "raw": "http://localhost:8083/api/v1/pedido/listar/REF-1",
-                  "protocol": "http",
-                  "host": [
-                    "localhost:8083"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "pedido",
-                    "listar",
-                    "REF-1"
-                  ],
-                  "query": [],
-                  "variable": []
-                }
-              }
-            },
-            {
-              "name": "Referencia 2",
-              "event": [],
-              "request": {
-                "method": "GET",
-                "header": [],
-                "auth": {
-                  "type": "noauth"
-                },
-                "description": "",
-                "url": {
-                  "raw": "http://localhost:8083/api/v1/pedido/listar/REF-2",
-                  "protocol": "http",
-                  "host": [
-                    "localhost:8083"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "pedido",
-                    "listar",
-                    "REF-2"
                   ],
                   "query": [],
                   "variable": []

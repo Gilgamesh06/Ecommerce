@@ -8,3 +8,5 @@
     * [**Carrito de Compra**](/Backend/Microservicio-carrito/)
 
 * Se realiza pruebas de endpoints sin comunicacion con otros servicios y con comunicacion con servicios.
+
+* Se Genero el Api Gateway *(`Kong`)* para enrutar todas las rutas de los diferentes microservicios.

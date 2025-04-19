@@ -372,6 +372,253 @@
       ]
     },
     {
+      "name": "Catalogo",
+      "item": [
+        {
+          "name": "Filtros",
+          "item": [
+            {
+              "name": "Subtipo",
+              "item": [
+                {
+                  "name": "Hombre:Ropa:Camisa",
+                  "event": [],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "description": "",
+                    "url": {
+                      "raw": "http://localhost:8081/api/v1/catalogo/Hombre?tipo=Ropa&subtipo=Camisa",
+                      "protocol": "http",
+                      "host": [
+                        "localhost:8081"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "catalogo",
+                        "Hombre"
+                      ],
+                      "query": [
+                        {
+                          "key": "tipo",
+                          "value": "Ropa"
+                        },
+                        {
+                          "key": "subtipo",
+                          "value": "Camisa"
+                        }
+                      ],
+                      "variable": []
+                    }
+                  }
+                },
+                {
+                  "name": "Mujer:Ropa:Chaqueta",
+                  "event": [],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "description": "",
+                    "url": {
+                      "raw": "http://localhost:8081/api/v1/catalogo/Mujer?tipo=Ropa&subtipo=Chaqueta",
+                      "protocol": "http",
+                      "host": [
+                        "localhost:8081"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "catalogo",
+                        "Mujer"
+                      ],
+                      "query": [
+                        {
+                          "key": "tipo",
+                          "value": "Ropa"
+                        },
+                        {
+                          "key": "subtipo",
+                          "value": "Chaqueta"
+                        }
+                      ],
+                      "variable": []
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Tipo",
+              "item": [
+                {
+                  "name": "Hombre:Ropa",
+                  "event": [],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "description": "",
+                    "url": {
+                      "raw": "http://localhost:8081/api/v1/catalogo/Hombre?tipo=Ropa",
+                      "protocol": "http",
+                      "host": [
+                        "localhost:8081"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "catalogo",
+                        "Hombre"
+                      ],
+                      "query": [
+                        {
+                          "key": "tipo",
+                          "value": "Ropa"
+                        }
+                      ],
+                      "variable": []
+                    }
+                  }
+                },
+                {
+                  "name": "Mujer:Ropa",
+                  "event": [],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "description": "",
+                    "url": {
+                      "raw": "http://localhost:8081/api/v1/catalogo/Mujer?tipo=Ropa",
+                      "protocol": "http",
+                      "host": [
+                        "localhost:8081"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "catalogo",
+                        "Mujer"
+                      ],
+                      "query": [
+                        {
+                          "key": "tipo",
+                          "value": "Ropa"
+                        }
+                      ],
+                      "variable": []
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Target",
+              "item": [
+                {
+                  "name": "Hombre",
+                  "event": [],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "description": "",
+                    "url": {
+                      "raw": "http://localhost:8081/api/v1/catalogo/Hombre",
+                      "protocol": "http",
+                      "host": [
+                        "localhost:8081"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "catalogo",
+                        "Hombre"
+                      ],
+                      "query": [],
+                      "variable": []
+                    }
+                  }
+                },
+                {
+                  "name": "Mujer",
+                  "event": [],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "description": "",
+                    "url": {
+                      "raw": "http://localhost:8081/api/v1/catalogo/Mujer",
+                      "protocol": "http",
+                      "host": [
+                        "localhost:8081"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "catalogo",
+                        "Mujer"
+                      ],
+                      "query": [],
+                      "variable": []
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Menu",
+          "item": [
+            {
+              "name": "Menu de FIltros",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/catalogo/filtros",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "catalogo",
+                    "filtros"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "Inventario",
       "item": [
         {
@@ -454,7 +701,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"cantidad\": 5,\n    \"productoAddDTO\": {\n        \"referencia\": \"REF002\",\n        \"nombre\": \"Pantalón Deportivo\",\n        \"talla\": \"L\",\n        \"tipo\": \"Ropa\",\n        \"subtipo\": \"Pantalón\",\n        \"target\": \"Mujer\",\n        \"color\": \"Negro\",\n        \"precioUnid\": 35.50,\n        \"precioVenta\": 40.00,\n        \"detalleProductoAddDTO\": {\n            \"descripcion\": \"Pantalón deportivo con tecnología de secado rápido.\",\n            \"composicion\": \"80% poliéster, 20% elastano\",\n            \"pais\": \"Italia\"\n        }\n    }\n}\n",
+                  "raw": "{\n    \"cantidad\": 5,\n    \"productoAddDTO\": {\n        \"referencia\": \"REF002\",\n        \"nombre\": \"Pantalón Deportivo\",\n        \"talla\": \"L\",\n        \"tipo\": \"Ropa\",\n        \"subtipo\": \"Pantalon\",\n        \"target\": \"Mujer\",\n        \"color\": \"Negro\",\n        \"precioUnid\": 35.50,\n        \"precioVenta\": 40.00,\n        \"detalleProductoAddDTO\": {\n            \"descripcion\": \"Pantalón deportivo con tecnología de secado rápido.\",\n            \"composicion\": \"80% poliéster, 20% elastano\",\n            \"pais\": \"Italia\"\n        }\n    }\n}\n",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -567,7 +814,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "http://localhost:8081/api/v1/inventario/agregar",
+                  "raw": "http://localhost:8081/api/v1/inventario/agregar?tipo=Ropa",
                   "protocol": "http",
                   "host": [
                     "localhost:8081"
@@ -578,7 +825,12 @@
                     "inventario",
                     "agregar"
                   ],
-                  "query": [],
+                  "query": [
+                    {
+                      "key": "tipo",
+                      "value": "Ropa"
+                    }
+                  ],
                   "variable": []
                 },
                 "body": {
@@ -670,6 +922,49 @@
                 "body": {
                   "mode": "raw",
                   "raw": "{\n    \"cantidad\": 10,\n    \"productoAddDTO\": {\n        \"referencia\": \"REF001\",\n        \"nombre\": \"Camisa Casual\",\n        \"talla\": \"L\",\n        \"tipo\": \"Ropa\",\n        \"subtipo\": \"Camisa\",\n        \"target\": \"Hombre\",\n        \"color\": \"Verde\",\n        \"precioUnid\": 25.99,\n        \"precioVenta\": 30.99,\n        \"detalleProductoAddDTO\": {\n            \"descripcion\": \"Camisa de algodón de manga larga.\",\n            \"composicion\": \"100% algodón\",\n            \"pais\": \"España\"\n        }\n    }\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Producto 8",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8081/api/v1/inventario/agregar",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8081"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventario",
+                    "agregar"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cantidad\": 15,\n    \"productoAddDTO\": {\n        \"referencia\": \"REF006\",\n        \"nombre\": \"Pantalón Deportivo\",\n        \"talla\": \"L\",\n        \"tipo\": \"Ropa\",\n        \"subtipo\": \"Pantalon\",\n        \"target\": \"Hombre\",\n        \"color\": \"Gris\",\n        \"precioUnid\": 35.50,\n        \"precioVenta\": 50.00,\n        \"detalleProductoAddDTO\": {\n            \"descripcion\": \"Pantalón deportivo con tecnología de secado rápido.\",\n            \"composicion\": \"80% poliéster, 20% elastano\",\n            \"pais\": \"Italia\"\n        }\n    }\n}\n",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -1227,6 +1522,38 @@
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      "name": "Kong",
+      "item": [
+        {
+          "name": "Get Products",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "http://localhost/api/v1/inventario/listar-todos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "inventario",
+                "listar-todos"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
         }
       ]
     }

@@ -72,7 +72,7 @@ public class CatalogoService {
                 tallas.add(producto.getTalla());
                 colores.add(producto.getColor());
                 DetalleProductoResponseDTO detalle = this.detalleProductoService.converDetallePorductoResponse(producto.getDetalleProducto());
-                variantes.add(new VarianteDTO(producto.getId(), producto.getTalla(), producto.getColor(), detalle));
+                variantes.add(new VarianteDTO(producto.getId(), producto.getTalla(), producto.getColor(),producto.getPrecioVenta(), detalle));
             }
 
             return new ProductoAgrupadoDTO(

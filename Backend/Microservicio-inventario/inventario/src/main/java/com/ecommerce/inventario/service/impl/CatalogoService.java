@@ -8,8 +8,8 @@ import com.ecommerce.inventario.repository.ProductoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
-import java.awt.print.Pageable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -44,20 +44,18 @@ public class CatalogoService {
     }
 
 
-    private Optional<Map<String, List<Producto>>> groupMapProductosByReference(List<Producto> productos){
-        Optional<Map<String, List<Producto>>> mapOpt = Optional.empty();
+    private Map<String, List<Producto>> groupMapProductosByReference(Page<Producto> productos){
+        Map<String, List<Producto>> map = new HashMap<>();;
         if(!productos.isEmpty()){
-            Map<String, List<Producto>> productosPorReferencia = productos.stream()
+            return productos.getContent()
+                    .stream()
                     .collect(Collectors.groupingBy(Producto::getReferencia));
-            return Optional.of(productosPorReferencia);
         }
-        return mapOpt;
+        return map;
     }
 
     private Page<ProductoAgrupadoDTO> filterProducts(Page<Producto> productosPage) {
-        Map<String, List<Producto>> productosPorReferencia = productosPage.getContent()
-                .stream()
-                .collect(Collectors.groupingBy(Producto::getReferencia));
+        Map<String, List<Producto>> productosPorReferencia = groupMapProductosByReference(productosPage);
 
         List<ProductoAgrupadoDTO> productosAgrupadosDTO = productosPorReferencia.entrySet().stream().map(entry -> {
             String referencia = entry.getKey();
@@ -87,24 +85,7 @@ public class CatalogoService {
         return new PageImpl<>(productosAgrupadosDTO, productosPage.getPageable(), productosPage.getTotalElements());
     }
 
-    private Page<ProductoAgrupadoDTO> filterProductsByTarget(String target, Pageable pageable) {
-        Page<Producto> productos = getProductsByTarget(target, pageable);
-        return filterProducts(productos);
-    }
-
-
-    private Page<ProductoAgrupadoDTO> filterProductsByTargetAndTipo(String target, String tipo, Pageable pageable){
-        Page<Producto> productos = getProductsByTargetAndTipo(target, tipo, pageable);
-        return filterProducts(productos);
-    }
-
-    private Page<ProductoAgrupadoDTO> filterProductsByTargetAndTipoAndSubtipo(String target, String tipo, String subtipo, Pageable pageable){
-        Page<Producto> productos = getProductsByTargetAndTipoAndSubtipo(target, tipo, subtipo, pageable);
-        return filterProducts(productos);
-    }
-
-
-    public Page<ProductoAgrupadoDTO> filterProducts(String target, String tipo, String subtipo, Pageable pageable){
+    public Page<ProductoAgrupadoDTO> filterProductsTargets(String target, String tipo, String subtipo, Pageable pageable){
         Page<Producto> productosPage;
 
         if (tipo == null || tipo.isBlank()) {

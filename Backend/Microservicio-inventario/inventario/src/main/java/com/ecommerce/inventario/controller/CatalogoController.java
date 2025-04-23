@@ -8,9 +8,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.awt.print.Pageable;
-import java.util.List;
+import org.springframework.data.domain.Pageable;
 import java.util.Map;
 import java.util.Set;
 
@@ -37,7 +35,7 @@ public class CatalogoController {
             @RequestParam(required = false) String subtipo,
             @PageableDefault(size = 10, sort = "nombre", direction = Sort.Direction.ASC) Pageable pageable) {
 
-        Page<ProductoAgrupadoDTO> productos = this.catalogoService.filterProducts(target, tipo, subtipo, pageable);
+        Page<ProductoAgrupadoDTO> productos = this.catalogoService.filterProductsTargets(target, tipo, subtipo, pageable);
 
         if (productos.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

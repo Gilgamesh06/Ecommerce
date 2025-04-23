@@ -7,7 +7,7 @@ cd Microservicio-inventario/inventario || exit
 chmod +x mvnw
 
 # Ejecutar mvnw
-./mvnw package
+./mvnw clean package -DskipTests
 
 # Cambiar al directorio del microservicio de venta
 cd ../../Microservicio-venta/venta || exit
@@ -16,7 +16,7 @@ cd ../../Microservicio-venta/venta || exit
 chmod +x mvnw
 
 # Ejecutar mvnw
-./mvnw package
+./mvnw clean package -DskipTests
 
 # Cambiar al directorio del microservicio de pedido
 cd ../../Microservicio-pedido/pedido || exit
@@ -25,7 +25,8 @@ cd ../../Microservicio-pedido/pedido || exit
 chmod +x mvnw
 
 # Ejecutar mvnw
-./mvnw package
+./mvnw clean package -DskipTests
+
 
 # Cambiar al directorio del microservicio de pedido
 cd ../../Microservicio-carrito/carrito || exit
@@ -34,11 +35,7 @@ cd ../../Microservicio-carrito/carrito || exit
 chmod +x mvnw
 
 # Ejecutar mvnw
-./mvnw package
-
-# dar permisos
-chmod +x wait-for-redis.sh
-
+./mvnw clean package -DskipTests
 
 # Volver al directorio anterior
 cd ../../ || exit

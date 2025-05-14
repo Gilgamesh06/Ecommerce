@@ -24,7 +24,7 @@ public class PrecioAddDTO {
 
     // Constructor
     public PrecioAddDTO(){}
-    public PrecioAddDTO(Long productoId, Double precioUnid,Double precioVenta, LocalDateTime fecha, Producto producto){
+    public PrecioAddDTO(Double precioUnid,Double precioVenta, Producto producto){
         this.precioUnid = precioUnid;
         this.precioVenta = precioVenta;
         this.producto = producto;

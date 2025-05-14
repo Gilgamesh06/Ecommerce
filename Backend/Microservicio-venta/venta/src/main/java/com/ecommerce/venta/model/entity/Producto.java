@@ -21,7 +21,7 @@ public class Producto {
 
     // Constructores
     public Producto(){}
-    public Producto(String nombre, String referencia, String talla, String color,String tipo ,String subtipo, String target){
+    public Producto(String nombre, String referencia, String talla, String color,String subtipo, String target){
         this.nombre = nombre;
         this.referencia = referencia;
         this.talla = talla;
@@ -31,6 +31,7 @@ public class Producto {
     }
 
     // Setters
+    public void setId(Long id){this.id = id;}
     public void setNombre(String nombre){this.nombre = nombre;}
     public void setReferencia(String referencia){this.referencia = referencia;}
     public void setTalla(String talla){this.talla = talla;}

@@ -73,7 +73,7 @@ public class VentaService {
     }
     private List<DetalleVentaAddDTO> crearDetalleVenta(Venta venta, List<CarritoResponseDTO> carritoResponseDTOs,
                                                        List<InventarioResponseDTO> productosInventario){
-        List<Producto> productos = this.productoService.RetornarProductosVenta(productosInventario);
+        List<Producto> productos = this.productoService.retornarProductosVenta(productosInventario);
         List<DetalleVentaAddDTO> detalleVentaAddDTOS = new ArrayList<>();
         for(int i = 0; i< productos.size() ; i++ ){
             detalleVentaAddDTOS.add(this.detalleVentaService.convertDetalleVentaDTO(venta,
@@ -116,7 +116,7 @@ public class VentaService {
             Optional<VentaResponseDTO> ventaResponseOpt = Optional.empty();
 
             if(this.validationProduct.validarProductos(productosInventario,carritoResponseDTOs)){
-                List<Producto> productos = this.productoService.RetornarProductosVenta(productosInventario);
+                List<Producto> productos = this.productoService.retornarProductosVenta(productosInventario);
                 Venta venta = crearVenta();
                 List<DetalleVentaAddDTO> detalleVentaAddDTOS = crearDetalleVenta(venta,carritoResponseDTOs,productosInventario);
                 List<DetalleVentaResponseDTO> detalleVentaResposeDTOS = guardarDetalleVenta(detalleVentaAddDTOS);

@@ -79,7 +79,7 @@ public class ProductoService implements GetAndSave<Producto, ProductoResponseDTO
     Este metodo me comprueba que los productos del servicio del inventario esten si no estan los agrega
     y retorna una lista de PrecioAddDTO para manejar la logica de historial de precios
      */
-    public List<PrecioAddDTO> ComporbarProductosVenta(List<InventarioResponseDTO> inventarios){
+    public List<PrecioAddDTO> comporbarProductosVenta(List<InventarioResponseDTO> inventarios){
        List<PrecioAddDTO> precios = new ArrayList<>();
         for(InventarioResponseDTO inventario: inventarios){
             Optional<Producto> productoOpt = searchProducto(
@@ -88,13 +88,13 @@ public class ProductoService implements GetAndSave<Producto, ProductoResponseDTO
                     inventario.getProductoInfoDTO().getColor());
             if(productoOpt.isEmpty()){
                 Producto producto = addProducto(converProductoAddDTO(inventario.getProductoInfoDTO()));
-                PrecioAddDTO precioAddDTO =this.precioService.converPrecioAddDTO(inventario.getProductoInfoDTO().getPrecioUnid(),
+                PrecioAddDTO precioAddDTO =this.precioService.convertPrecioAddDTO(inventario.getProductoInfoDTO().getPrecioUnid(),
                         inventario.getProductoInfoDTO().getPrecioVenta(),
                         producto);
                 precios.add(precioAddDTO);
             }
             else{
-                PrecioAddDTO precioAddDTO = this.precioService.converPrecioAddDTO(inventario.getProductoInfoDTO().getPrecioUnid(),
+                PrecioAddDTO precioAddDTO = this.precioService.convertPrecioAddDTO(inventario.getProductoInfoDTO().getPrecioUnid(),
                         inventario.getProductoInfoDTO().getPrecioVenta(),
                         productoOpt.get());
                 precios.add(precioAddDTO);
@@ -103,8 +103,8 @@ public class ProductoService implements GetAndSave<Producto, ProductoResponseDTO
         return precios;
     }
 
-    public List<Producto> RetornarProductosVenta(List<InventarioResponseDTO> productosInventario){
-        List<PrecioAddDTO> precioAddDTOS = this.ComporbarProductosVenta(productosInventario);
+    public List<Producto> retornarProductosVenta(List<InventarioResponseDTO> productosInventario){
+        List<PrecioAddDTO> precioAddDTOS = this.comporbarProductosVenta(productosInventario);
         List<Precio> precios = precioAddDTOS.stream()
                 .map(this.precioService::addPrecio)
                 .toList();

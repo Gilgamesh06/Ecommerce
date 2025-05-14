@@ -26,7 +26,7 @@ public class PrecioService implements GetAndSave<Precio, PrecioResponseDTO, Prec
        return this.precioRepository.findLatestPrecioByProductoId(productoId);
     }
 
-    public PrecioAddDTO converPrecioAddDTO( Double precioUnid, Double precioVenta, Producto producto){
+    public PrecioAddDTO convertPrecioAddDTO( Double precioUnid, Double precioVenta, Producto producto){
         PrecioAddDTO precioAddDTO = new PrecioAddDTO();
         precioAddDTO.setPrecioUnid(precioUnid);
         precioAddDTO.setPrecioVenta(precioVenta);
@@ -60,8 +60,7 @@ public class PrecioService implements GetAndSave<Precio, PrecioResponseDTO, Prec
         Precio precioExistente = precioOpt.get();
 
         // Si los precios son diferentes, actualizamos
-        if (!precioExistente.getPrecioUnid().equals(addPrecio.getPrecioUnid()) ||
-                !precioExistente.getPrecioVenta().equals(addPrecio.getPrecioVenta())) {
+        if (!precioExistente.getPrecioVenta().equals(addPrecio.getPrecioVenta())) {
             return crearNuevoPrecio(addPrecio);
         }
 

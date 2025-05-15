@@ -60,7 +60,7 @@ public class PrecioService implements GetAndSave<Precio, PrecioResponseDTO, Prec
         Precio precioExistente = precioOpt.get();
 
         // Si los precios son diferentes, actualizamos
-        if (!precioExistente.getPrecioVenta().equals(addPrecio.getPrecioVenta())) {
+        if ( !precioExistente.getPrecioUnid().equals(addPrecio.getPrecioUnid()) || !precioExistente.getPrecioVenta().equals(addPrecio.getPrecioVenta())) {
             return crearNuevoPrecio(addPrecio);
         }
 

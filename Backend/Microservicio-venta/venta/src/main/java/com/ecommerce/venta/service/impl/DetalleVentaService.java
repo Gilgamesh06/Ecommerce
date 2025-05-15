@@ -55,7 +55,7 @@ public class DetalleVentaService {
                 cantidad);
     }
 
-    public DetalleVenta agregarventa(DetalleVentaAddDTO detalleVentaAddDTO, double precioVenta){
+    public DetalleVenta agregarVenta(DetalleVentaAddDTO detalleVentaAddDTO, Double precioVenta){
         DetalleVenta detalleVenta = new DetalleVenta();
         detalleVenta.setVenta(detalleVentaAddDTO.getVenta());
         detalleVenta.setProducto(detalleVentaAddDTO.getProducto());
@@ -68,15 +68,24 @@ public class DetalleVentaService {
 
         @Transactional
         public List<DetalleVentaResponseDTO> addDetalleVenta(List<DetalleVentaAddDTO> detalleVentaAddDTOs){
+        // Crea una Lista de DTOs DetalleVentaRespondeDTO
         List<DetalleVentaResponseDTO> detalleVentaResposeDTOS = new ArrayList<>();
+        // Itera la lista detalleVentaDTOS ingregasada como parametro en el metodo
         for(DetalleVentaAddDTO detalleVentaAddDTO: detalleVentaAddDTOs){
+            // llama al metodo getPrecio del atributo precioService el cual recive el id del objeto Producto y
+            // Retorna un Optional<Precio> el cual es el Objeto Precio con la fecha mas reciente
             Optional<Precio> precioOpt =this.precioService.getPrecio(detalleVentaAddDTO.getProducto().getId());
             if(precioOpt.isPresent()){
-                DetalleVenta detalleVenta = agregarventa(detalleVentaAddDTO, precioOpt.get().getPrecioVenta());
+                // Si esta presente el objeto Precio en el Optional llama al metodo agregarVenta parandole los
+                // parametros detallVentaAddDTO y y el atributo precioVenta obtenido de precioOpt.get()
+                DetalleVenta detalleVenta = agregarVenta(detalleVentaAddDTO, precioOpt.get().getPrecioVenta());
+                // Guarda el detalleVenta en la db
                 this.detalleVentaRepository.save(detalleVenta);
+                // Agregar a la lista el DTO de DetalleVentaResponseDTO
                 detalleVentaResposeDTOS.add(converDetalleVentaResponseDTO(detalleVenta));
             }
         }
+        // Retorna List<DetalleVentaResponseDTO>
         return detalleVentaResposeDTOS;
     }
 }

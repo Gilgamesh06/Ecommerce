@@ -5,7 +5,6 @@ import com.ecommerce.venta.model.dto.precio.PrecioAddDTO;
 import com.ecommerce.venta.model.dto.producto.ProductoInfoDTO;
 import com.ecommerce.venta.model.entity.Precio;
 import com.ecommerce.venta.model.entity.Producto;
-import com.ecommerce.venta.repository.PrecioRepository;
 import com.ecommerce.venta.repository.ProductoRepository;
 import com.ecommerce.venta.service.impl.PrecioService;
 import com.ecommerce.venta.service.impl.ProductoService;
@@ -22,8 +21,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ProductoServiceTest {
@@ -51,21 +49,29 @@ public class ProductoServiceTest {
         return inventario;
     }
 
+    public static List<Producto> getProducts(){
+        Producto producto1 = new Producto("camisa deportiva","CAM01LN","L","negro","camisa","hombre");
+        Producto producto2 = new Producto("pantalon deportivo","PAN0136G","36","gris","pantalon","mujer");
+        Producto producto3 = new Producto("pantaloneta casual","PAMCAS0134B","34","blanco","pantalon","hombre");
+        return List.of(producto1,producto2,producto3);
+    }
+
     @Test
-    public void retornarProductosVentaTest() {
+    public void guardaProductosNoExitentesTest() {
         List<InventarioResponseDTO> inventario = getInventario();
 
-        // Asegúrate de que inventario no sea null y tenga elementos
-        assertNotNull(inventario);
-        assertFalse(inventario.isEmpty());
 
         // Configura los mocks
+
+        // Retorna un Optional.empty (un Optional vacio al ingresar cualquier parametro)
         when(this.productoRepository.findByReferenciaAndTallaAndColor(anyString(), anyString(), anyString()))
                 .thenReturn(Optional.empty());
 
+        // Retorna el Objeto que se ingreso como parametro en el metodo save
         when(this.productoRepository.save(any(Producto.class)))
                 .thenAnswer(inv -> inv.getArgument(0));
 
+        // Convierte los parametros precioUnid, precioVenta y producto en un PrecioAddDTO
         when(this.precioService.convertPrecioAddDTO(anyDouble(), anyDouble(), any(Producto.class)))
                 .thenAnswer(inv -> {
                     Double precioUnid = inv.getArgument(0);
@@ -80,6 +86,7 @@ public class ProductoServiceTest {
                     return precioAddDTO;
                 });
 
+        // Retonar un objeto precio con los atributos parceados del dto PrecioAddDTO
         when(this.precioService.addPrecio(any(PrecioAddDTO.class))).thenAnswer(
             inv -> {
                 PrecioAddDTO addPrecio = inv.getArgument(0);
@@ -92,19 +99,150 @@ public class ProductoServiceTest {
             }
         );
 
-        // Llama al método que estás probando
-        List<Producto> productos = this.productoService.retornarProductosVenta(inventario);
+        // Metodo que se esta probando
+        List<Producto> productosVenta = this.productoService.retornarProductosVenta(inventario);
 
-        // Asegúrate de que productos no sea null y no esté vacío
-        assertNotNull(productos);
-        assertFalse(productos.isEmpty());
+        // Asegura de que productos no sea null y no este vacío
+        assertNotNull(productosVenta);
+        assertFalse(productosVenta.isEmpty());
 
-        // Accede al primer elemento de inventario
-        InventarioResponseDTO primerInventario = inventario.get(0);
-        ProductoInfoDTO producto = primerInventario.getProductoInfoDTO();
+        // Obtiene la lista de ProductoInfoDTO del la lista InventarioResponseDTO
+        List<ProductoInfoDTO> productos = inventario.stream()
+                .map(InventarioResponseDTO::getProductoInfoDTO)
+                .toList();
 
-        // Realiza las aserciones
-        assertEquals(producto.getNombre(), productos.get(0).getNombre());
-        assertEquals(producto.getReferencia(), productos.get(0).getReferencia());
+        for (int i = 0; i< productosVenta.size(); i++ ){
+            // Realiza las aserciones
+            assertEquals(productos.get(i).getNombre(), productosVenta.get(i).getNombre());
+            assertEquals(productos.get(i).getReferencia(), productosVenta.get(i).getReferencia());
+            assertEquals(productos.get(i).getTalla(), productosVenta.get(i).getTalla());
+            assertEquals(productos.get(i).getColor(), productosVenta.get(i).getColor());
+        }
+    }
+
+    @Test
+    public void retornarProductosExistentesTest(){
+        List<InventarioResponseDTO> inventario = getInventario();
+        List<Producto> productos = getProducts();
+
+        // Retorna Producto 1
+        when(this.productoRepository.findByReferenciaAndTallaAndColor(eq("CAM01LN"), eq("L"), eq("negro")))
+                .thenReturn(Optional.of(productos.get(0)));
+
+        // Retorna Producto 2
+        when(this.productoRepository.findByReferenciaAndTallaAndColor(eq("PAN0136G"), eq("36"), eq("gris")))
+                .thenReturn(Optional.of(productos.get(1)));
+
+        // Retorna Producto 3
+        when(this.productoRepository.findByReferenciaAndTallaAndColor(eq("PAMCAS0134B"), eq("34"), eq("blanco")))
+                .thenReturn(Optional.of(productos.get(2)));
+
+        // Convierte los parametros precioUnid, precioVenta y producto en un PrecioAddDTO
+        when(this.precioService.convertPrecioAddDTO(anyDouble(), anyDouble(), any(Producto.class)))
+                .thenAnswer(inv -> {
+                    Double precioUnid = inv.getArgument(0);
+                    Double precioVenta = inv.getArgument(1);
+                    Producto producto = inv.getArgument(2);
+
+                    // Crea y devuelve un PrecioAddDTO con los valores proporcionados
+                    PrecioAddDTO precioAddDTO = new PrecioAddDTO();
+                    precioAddDTO.setPrecioUnid(precioUnid);
+                    precioAddDTO.setPrecioVenta(precioVenta);
+                    precioAddDTO.setProducto(producto);
+                    return precioAddDTO;
+                });
+
+        // Retonar un objeto precio con los atributos parceados del dto PrecioAddDTO
+        when(this.precioService.addPrecio(any(PrecioAddDTO.class))).thenAnswer(
+                inv -> {
+                    PrecioAddDTO addPrecio = inv.getArgument(0);
+                    Precio nuevoPrecio = new Precio();
+                    nuevoPrecio.setPrecioUnid(addPrecio.getPrecioUnid());
+                    nuevoPrecio.setPrecioVenta(addPrecio.getPrecioVenta());
+                    nuevoPrecio.setFecha(LocalDateTime.now());
+                    nuevoPrecio.setProducto(addPrecio.getProducto());
+                    return nuevoPrecio;
+                }
+        );
+
+        // Metodo que se esta probando
+        List<Producto> productosVenta = this.productoService.retornarProductosVenta(inventario);
+
+        // Asegura de que productos no sea null y no este vacío
+        assertNotNull(productosVenta);
+        assertFalse(productosVenta.isEmpty());
+
+        for (int i = 0; i< productosVenta.size(); i++ ){
+            // Realiza las aserciones
+            assertEquals(productos.get(i).getNombre(), productosVenta.get(i).getNombre());
+            assertEquals(productos.get(i).getReferencia(), productosVenta.get(i).getReferencia());
+            assertEquals(productos.get(i).getTalla(), productosVenta.get(i).getTalla());
+            assertEquals(productos.get(i).getColor(), productosVenta.get(i).getColor());
+        }
+    }
+
+    @Test
+    public void guardaProductosNoExistentesYRetornaProductosExistentesTest(){
+        List<InventarioResponseDTO> inventario = getInventario();
+        List<Producto> productos = getProducts();
+
+        // Retorna Producto 1
+        lenient().when(this.productoRepository.findByReferenciaAndTallaAndColor(eq("CAM01LN"), eq("L"), eq("negro")))
+                .thenReturn(Optional.of(productos.get(0)));
+
+        // Retorna Producto 2
+        lenient().when(this.productoRepository.findByReferenciaAndTallaAndColor(eq("PAN0136G"), eq("36"), eq("gris")))
+                .thenReturn(Optional.of(productos.get(1)));
+
+        // Retorna Producto 3
+        lenient().when(this.productoRepository.findByReferenciaAndTallaAndColor(anyString(),anyString(),anyString()))
+                .thenReturn(Optional.empty());
+
+        // Retorna el Objeto que se ingreso como parametro en el metodo save
+        when(this.productoRepository.save(any(Producto.class)))
+                .thenAnswer(inv -> inv.getArgument(0));
+
+        // Convierte los parametros precioUnid, precioVenta y producto en un PrecioAddDTO
+        when(this.precioService.convertPrecioAddDTO(anyDouble(), anyDouble(), any(Producto.class)))
+                .thenAnswer(inv -> {
+                    Double precioUnid = inv.getArgument(0);
+                    Double precioVenta = inv.getArgument(1);
+                    Producto producto = inv.getArgument(2);
+
+                    // Crea y devuelve un PrecioAddDTO con los valores proporcionados
+                    PrecioAddDTO precioAddDTO = new PrecioAddDTO();
+                    precioAddDTO.setPrecioUnid(precioUnid);
+                    precioAddDTO.setPrecioVenta(precioVenta);
+                    precioAddDTO.setProducto(producto);
+                    return precioAddDTO;
+                });
+
+        // Retonar un objeto precio con los atributos parceados del dto PrecioAddDTO
+        when(this.precioService.addPrecio(any(PrecioAddDTO.class))).thenAnswer(
+                inv -> {
+                    PrecioAddDTO addPrecio = inv.getArgument(0);
+                    Precio nuevoPrecio = new Precio();
+                    nuevoPrecio.setPrecioUnid(addPrecio.getPrecioUnid());
+                    nuevoPrecio.setPrecioVenta(addPrecio.getPrecioVenta());
+                    nuevoPrecio.setFecha(LocalDateTime.now());
+                    nuevoPrecio.setProducto(addPrecio.getProducto());
+                    return nuevoPrecio;
+                }
+        );
+
+        // Metodo que se esta probando
+        List<Producto> productosVenta = this.productoService.retornarProductosVenta(inventario);
+
+        // Asegura de que productos no sea null y no este vacío
+        assertNotNull(productosVenta);
+        assertFalse(productosVenta.isEmpty());
+
+        for (int i = 0; i< productosVenta.size(); i++ ){
+            // Realiza las aserciones
+            assertEquals(productos.get(i).getNombre(), productosVenta.get(i).getNombre());
+            assertEquals(productos.get(i).getReferencia(), productosVenta.get(i).getReferencia());
+            assertEquals(productos.get(i).getTalla(), productosVenta.get(i).getTalla());
+            assertEquals(productos.get(i).getColor(), productosVenta.get(i).getColor());
+        }
     }
 }

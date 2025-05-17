@@ -44,6 +44,7 @@ public class VentaService {
 
 
     private VentaResponseDTO converVentaResponseDTO(Venta venta, List<DetalleVentaResponseDTO> detalleVenta){
+        // Convierte la venta en Una DTO VentaResponseDTO
         VentaResponseDTO ventaResponseDTO = new VentaResponseDTO();
         ventaResponseDTO.setReferencia(venta.getReferencia());
         ventaResponseDTO.setDocumentoCliente(venta.getDocumentoCliente());
@@ -69,11 +70,11 @@ public class VentaService {
     private Venta crearVenta(){
         Venta venta = new Venta();
         venta.setFecha(LocalDateTime.now());
-        return this.ventaRepository.save(venta);
+        return venta;
     }
     private List<DetalleVentaAddDTO> crearDetalleVenta(Venta venta, List<CarritoResponseDTO> carritoResponseDTOs,
-                                                       List<InventarioResponseDTO> productosInventario){
-        List<Producto> productos = this.productoService.retornarProductosVenta(productosInventario);
+                                                       List<Producto> productos){
+
         List<DetalleVentaAddDTO> detalleVentaAddDTOS = new ArrayList<>();
         for(int i = 0; i< productos.size() ; i++ ){
             detalleVentaAddDTOS.add(this.detalleVentaService.convertDetalleVentaDTO(venta,
@@ -95,11 +96,12 @@ public class VentaService {
     }
 
     @Transactional
-    private Venta actualizarVenta(Venta venta, Double valorVenta){
+    private Venta guardarVenta(Venta venta, Double valorVenta){
         venta.setValorVenta(valorVenta);
         venta.setEstado("Exitosa");
+        venta = this.ventaRepository.save(venta);
         venta.setReferencia("REF-"+ venta.getId());
-        return  this.ventaRepository.save(venta);
+        return this.ventaRepository.save(venta);
     }
 
     private PedidoAddDTO converPedidoAddDTO(Venta venta){
@@ -110,21 +112,35 @@ public class VentaService {
     }
 
     public Optional<VentaResponseDTO> addElement(List<CarritoResponseDTO> carritoResponseDTOs){
+            // Obtiene los id de cada DTO CarritoRespondeDTO y los guarda en una lista
             List<Long> productIds = obtenerIds(carritoResponseDTOs);
+            // Obtiene una lista de InventarioResponseDTO a paritr de los id de los productos
             List<InventarioResponseDTO> productosInventario = obtenerPorductosInventario(productIds);
 
+            // Crea un Optional que almacena un VentaResponseDTO
             Optional<VentaResponseDTO> ventaResponseOpt = Optional.empty();
 
+            // Si la cantidad de productos es suficiente entra en el if
             if(this.validationProduct.validarProductos(productosInventario,carritoResponseDTOs)){
+                // Obtiene una lista de productos a partir de la lista de dtos InventarioRespondeDTO
                 List<Producto> productos = this.productoService.retornarProductosVenta(productosInventario);
+                // Crea una venta con la fecha actual
                 Venta venta = crearVenta();
-                List<DetalleVentaAddDTO> detalleVentaAddDTOS = crearDetalleVenta(venta,carritoResponseDTOs,productosInventario);
+                // Crea un los detalleVenta a partir de la venta el carritoResponse y porductosInventario
+                List<DetalleVentaAddDTO> detalleVentaAddDTOS = crearDetalleVenta(venta,carritoResponseDTOs,productos);
+                // guarda los detalleVenta
                 List<DetalleVentaResponseDTO> detalleVentaResposeDTOS = guardarDetalleVenta(detalleVentaAddDTOS);
+                // Calcula el valor de la venta
                 Double valorVenta = calcularValorVenta(detalleVentaResposeDTOS);
-                venta = actualizarVenta(venta,valorVenta);
+                // Guarda la venta en la base de datos
+                venta = guardarVenta(venta,valorVenta);
+                // Crea el pedido
                 PedidoAddDTO pedidoAddDTO = converPedidoAddDTO(venta);
+                // Envia el pedido al microservicio Pedido (HTTP Request)
                 this.ventaProducer.sendAddPedido(pedidoAddDTO);
+                // Envia la cantidad de los productos vendidos para actualizar (RabbitMQ)
                 this.ventaProducer.sendUpdateProduct(carritoResponseDTOs);
+                // Retornar una VentaResponseDTO
                 return Optional.of(converVentaResponseDTO(venta,detalleVentaResposeDTOS));
             }
             return ventaResponseOpt;

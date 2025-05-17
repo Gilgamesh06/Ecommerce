@@ -27,6 +27,7 @@ public class DetalleVentaAddDTO {
     // Setters
     public void setVenta(Venta venta){this.venta = venta;}
     public void setProducto(Producto producto){this.producto = producto;}
+    public void setCantidad(Integer cantidad){this.cantidad = cantidad;}
 
 
     // Getters

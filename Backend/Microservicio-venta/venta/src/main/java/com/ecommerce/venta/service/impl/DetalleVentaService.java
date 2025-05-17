@@ -72,7 +72,7 @@ public class DetalleVentaService {
         List<DetalleVentaResponseDTO> detalleVentaResposeDTOS = new ArrayList<>();
         // Itera la lista detalleVentaDTOS ingregasada como parametro en el metodo
         for(DetalleVentaAddDTO detalleVentaAddDTO: detalleVentaAddDTOs){
-            // llama al metodo getPrecio del atributo precioService el cual recive el id del objeto Producto y
+            // llama al metodo getPrecio del atributo precioService el cual recibe el id del objeto Producto y
             // Retorna un Optional<Precio> el cual es el Objeto Precio con la fecha mas reciente
             Optional<Precio> precioOpt =this.precioService.getPrecio(detalleVentaAddDTO.getProducto().getId());
             if(precioOpt.isPresent()){

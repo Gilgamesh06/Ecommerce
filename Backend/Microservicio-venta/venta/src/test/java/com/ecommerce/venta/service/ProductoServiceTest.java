@@ -1,5 +1,6 @@
-package com.ecommerce.venta;
+package com.ecommerce.venta.service;
 
+import com.ecommerce.venta.TestDataProvider;
 import com.ecommerce.venta.model.dto.inventario.InventarioResponseDTO;
 import com.ecommerce.venta.model.dto.precio.PrecioAddDTO;
 import com.ecommerce.venta.model.dto.producto.ProductoInfoDTO;
@@ -34,31 +35,12 @@ public class ProductoServiceTest {
     @InjectMocks
     private ProductoService productoService;
 
-    public static List<InventarioResponseDTO> getInventario(){
-        ProductoInfoDTO producto1 = new ProductoInfoDTO("CAM01LN","camisa deportiva","L","negro","hombre","camisa",35000.0,50000.0);
-        ProductoInfoDTO producto2 = new ProductoInfoDTO("PAN0136G","pantalon deportivo","36","gris","mujer","pantalon",45000.0,70000.0);
-        ProductoInfoDTO producto3 = new ProductoInfoDTO("PAMCAS0134B","pantaloneta casual","34","blanco","hombre","pantalon",25000.0,45000.0);
-        InventarioResponseDTO inventario1 =  new InventarioResponseDTO(20,producto1);
-        InventarioResponseDTO inventario2 =  new InventarioResponseDTO(30,producto2);
-        InventarioResponseDTO inventario3 =  new InventarioResponseDTO(40,producto3);
-
-        List<InventarioResponseDTO> inventario = new ArrayList<>();
-        inventario.add(inventario1);
-        inventario.add(inventario2);
-        inventario.add(inventario3);
-        return inventario;
-    }
-
-    public static List<Producto> getProducts(){
-        Producto producto1 = new Producto("camisa deportiva","CAM01LN","L","negro","camisa","hombre");
-        Producto producto2 = new Producto("pantalon deportivo","PAN0136G","36","gris","pantalon","mujer");
-        Producto producto3 = new Producto("pantaloneta casual","PAMCAS0134B","34","blanco","pantalon","hombre");
-        return List.of(producto1,producto2,producto3);
-    }
+    @InjectMocks
+    private TestDataProvider testDataProvider;
 
     @Test
     public void guardaProductosNoExitentesTest() {
-        List<InventarioResponseDTO> inventario = getInventario();
+        List<InventarioResponseDTO> inventario = this.testDataProvider.getInventario();
 
 
         // Configura los mocks
@@ -122,8 +104,8 @@ public class ProductoServiceTest {
 
     @Test
     public void retornarProductosExistentesTest(){
-        List<InventarioResponseDTO> inventario = getInventario();
-        List<Producto> productos = getProducts();
+        List<InventarioResponseDTO> inventario = this.testDataProvider.getInventario();
+        List<Producto> productos = this.testDataProvider.getProducts();
 
         // Retorna Producto 1
         when(this.productoRepository.findByReferenciaAndTallaAndColor(eq("CAM01LN"), eq("L"), eq("negro")))
@@ -183,8 +165,8 @@ public class ProductoServiceTest {
 
     @Test
     public void guardaProductosNoExistentesYRetornaProductosExistentesTest(){
-        List<InventarioResponseDTO> inventario = getInventario();
-        List<Producto> productos = getProducts();
+        List<InventarioResponseDTO> inventario = this.testDataProvider.getInventario();
+        List<Producto> productos = this.testDataProvider.getProducts();
 
         // Retorna Producto 1
         lenient().when(this.productoRepository.findByReferenciaAndTallaAndColor(eq("CAM01LN"), eq("L"), eq("negro")))

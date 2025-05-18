@@ -1,5 +1,6 @@
-package com.ecommerce.venta;
+package com.ecommerce.venta.service;
 
+import com.ecommerce.venta.TestDataProvider;
 import com.ecommerce.venta.model.dto.precio.PrecioAddDTO;
 import com.ecommerce.venta.model.entity.Precio;
 import com.ecommerce.venta.model.entity.Producto;
@@ -29,26 +30,13 @@ public class PrecioServiceTest {
     @InjectMocks
     private PrecioService precioService;
 
-    public static List<Producto> getProducts(){
-        Producto producto1 = new Producto("camisa deportiva","CAM01LN","L","negro","camisa","hombre");
-        Producto producto2 = new Producto("camisa casual","CAM02MG","M","gris","camisa","hombre");
-        Producto producto3 = new Producto("camisa formal","CAM03SB","S","blanco","camisa","hombre");
-        return List.of(producto1,producto2,producto3);
-    }
+    @InjectMocks
+    private TestDataProvider testDataProvider;
 
-    public static PrecioAddDTO getPrecioDTO(){
-        List<Producto> productos = getProducts();
-        Double precioUnid = 35000.0;
-        Double precioVenta = 50000.0;
-        LocalDateTime date = LocalDateTime.now();
-        Producto producto = productos.getFirst();
-        producto.setId(1L);
-        return new PrecioAddDTO(precioUnid,precioVenta,producto);
-    }
 
     @Test
     public void addNewPriceTest(){
-        PrecioAddDTO precio = getPrecioDTO();
+        PrecioAddDTO precio = this.testDataProvider.getPricesDTO();
         when(precioRepository.findLatestPrecioByProductoId(1L)).thenReturn(Optional.empty());
 
         when(precioRepository.save(any(Precio.class))).thenAnswer(
@@ -66,7 +54,7 @@ public class PrecioServiceTest {
     @Test
     public void updatePriceTest(){
         Double precioAntiguo = 30000.0;
-        PrecioAddDTO updatePrecio = getPrecioDTO();
+        PrecioAddDTO updatePrecio = this.testDataProvider.getPricesDTO();
         Precio precio = new Precio(updatePrecio.getPrecioUnid(),precioAntiguo,LocalDateTime.now(),updatePrecio.getProducto());
         when(precioRepository.findLatestPrecioByProductoId(1L)).thenReturn(Optional.of(precio));
 
@@ -84,7 +72,7 @@ public class PrecioServiceTest {
 
     @Test
     public void returnPriceTest(){
-        PrecioAddDTO updatePrecio = getPrecioDTO();
+        PrecioAddDTO updatePrecio = this.testDataProvider.getPricesDTO();
         Precio precio = new Precio(updatePrecio.getPrecioUnid(), updatePrecio.getPrecioVenta(), LocalDateTime.now(),updatePrecio.getProducto());
         when(precioRepository.findLatestPrecioByProductoId(1L)).thenReturn(Optional.of(precio));
 

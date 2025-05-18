@@ -152,21 +152,25 @@ public class VentaService {
 
     // Obtener los detalle de una venta
     public List<DetalleVentaResponseDTO> obtenerDetalles(String referencia){
+        // Busca la venta por medio de la referencia
         Optional<Venta> ventaOpt = searchVentaWithReferencia(referencia);
         if(ventaOpt.isPresent()){
+            // ingresa si esta presete la venta
             Long id = ventaOpt.get().getId();
+            // Obtiene el id de la venta
+            // retorna un lista de detalleventaResponnse de la venta con el id = id
             return this.detalleVentaService.getDetalleVenta(id);
         }
         return new ArrayList<>();
     }
 
-    private List<Venta> getAll(){
+    private List<Venta> getVentas(){
         return this.ventaRepository.findAll();
     }
 
     // Obtener todas las ventas
-    public List<VentaResponseDTO> getAllPedidos(){
-        List<Venta> ventas = getAll();
+    public List<VentaResponseDTO> getAllVentas(){
+        List<Venta> ventas = getVentas();
         List<VentaResponseDTO> ventaResponseDTOS = new ArrayList<>();
         for(Venta venta : ventas){
             List<DetalleVentaResponseDTO> detalleVentaResposeDTOS = obtenerDetalles(venta.getReferencia());
@@ -176,13 +180,20 @@ public class VentaService {
         return  ventaResponseDTOS;
     }
 
-    public List<List<DetalleVentaResponseDTO>> obtenerAllDetalles(List<String> referencia){
-        List<List<DetalleVentaResponseDTO>> listDetallesVenta = new ArrayList<>();
-        for(String ref: referencia){
-            List<DetalleVentaResponseDTO> detalleVentaResposeDTOS = obtenerDetalles(ref);
-            listDetallesVenta.add(detalleVentaResposeDTOS);
+    public Optional<VentaResponseDTO> getVentaByReference(String referencia){
+        // Busca la venta por medio de la referencia
+        Optional<Venta> ventaOpt = searchVentaWithReferencia(referencia);
+        if(ventaOpt.isPresent()){
+            // ingresa si esta presete la venta
+            Long id = ventaOpt.get().getId();
+            // Obtiene el id de la venta
+            // retorna un lista de detalleventaResponnse de la venta con el id = id
+            List<DetalleVentaResponseDTO> detalles = this.detalleVentaService.getDetalleVenta(id);
+            // Retorna un Optional<VentaResponseDTO>
+            return Optional.of(converVentaResponseDTO(ventaOpt.get(),detalles));
         }
-        return  listDetallesVenta;
+        // Retorna una Optinal empty
+        return Optional.empty();
     }
 
 }

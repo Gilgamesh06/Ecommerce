@@ -26,12 +26,19 @@ public class VentaController {
     public ResponseEntity<VentaResponseDTO> makeSale(@RequestBody List<CarritoResponseDTO> carritoResponseDTOs){
 
         Optional<VentaResponseDTO> ventaResponseOpt = this.ventaService.addElement(carritoResponseDTOs);
-        return ventaResponseOpt.map(ventaResponseDTO -> new ResponseEntity<>(ventaResponseDTO, HttpStatus.CREATED)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return ventaResponseOpt.map(ventaResponseDTO -> new ResponseEntity<>(ventaResponseDTO, HttpStatus.CREATED)).orElseGet(() -> new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY));
     }
+
+    @GetMapping("/obtener-venta/{referencia}")
+    public ResponseEntity<VentaResponseDTO> getVenta(@PathVariable String referencia){
+        Optional<VentaResponseDTO> ventaOpt = this.ventaService.getVentaByReference(referencia);
+        return ventaOpt.map(ventaResponseDTO -> new ResponseEntity<>(ventaResponseDTO, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
 
     @GetMapping("/listar-ventas")
     public ResponseEntity<List<VentaResponseDTO>> getAllVentas(){
-        List<VentaResponseDTO> ventaResponseDTOS = this.ventaService.getAllPedidos();
+        List<VentaResponseDTO> ventaResponseDTOS = this.ventaService.getAllVentas();
         if(ventaResponseDTOS.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -45,11 +52,5 @@ public class VentaController {
             return new ResponseEntity<>(new ArrayList<>(),HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(detalleVentaResposeDTOS, HttpStatus.OK);
-    }
-
-    @GetMapping("/obtener-detalles/all")
-    public  ResponseEntity<List<List<DetalleVentaResponseDTO>>> getAllDetallesVenta(@RequestBody List<String> referencia){
-        List<List<DetalleVentaResponseDTO>> listDetalleVenta = this.ventaService.obtenerAllDetalles(referencia);
-        return new ResponseEntity<>(listDetalleVenta, HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
-package com.ecommerce.venta;
+package com.ecommerce.venta.service;
 
+import com.ecommerce.venta.TestDataProvider;
 import com.ecommerce.venta.model.dto.detalleventa.DetalleVentaAddDTO;
 import com.ecommerce.venta.model.dto.detalleventa.DetalleVentaResponseDTO;
 import com.ecommerce.venta.model.dto.producto.ProductoResponseDTO;
@@ -41,59 +42,16 @@ public class DetalleVentaServiceTest {
     @InjectMocks
     private DetalleVentaService detalleVentaService;
 
+    @InjectMocks
+    private TestDataProvider testDataProvider;
 
-    public static List<Producto> getProducts(){
-        Producto producto1 = new Producto("camisa deportiva","CAM01LN","L","negro","camisa","hombre");
-        Producto producto2 = new Producto("camisa casual","CAM02MG","M","gris","camisa","hombre");
-        Producto producto3 = new Producto("camisa formal","CAM03SB","S","blanco","camisa","hombre");
-        producto1.setId(1L);
-        producto2.setId(2L);
-        producto3.setId(3L);
-        return List.of(producto1,producto2,producto3);
-    }
-
-    public static List<Precio> getPrecios(){
-        List<Precio> precios = new ArrayList<>();
-        Double precioUnid = 30000.0;
-        Double precioVenta = 40000.0;
-        List<Producto> productos = getProducts();
-        for(Producto producto : productos){
-            Precio precio = new Precio(precioUnid,precioVenta,LocalDateTime.now(),producto);
-            precios.add(precio);
-            precioUnid = precioUnid + 5000;
-            precioUnid = precioUnid + 5000;
-        }
-        return precios;
-    }
-
-    public static List<Integer> getCantidad(){
-        return List.of(3,4,5);
-    }
-
-    public static Venta getVenta(){
-
-        return new Venta("0001","222222","En proceso", LocalDateTime.now(),0.0);
-    }
-
-    public static List<DetalleVentaAddDTO> getDetalleVenta(){
-        List<DetalleVentaAddDTO> detalleVentaAddDTOS = new ArrayList<>();
-        List<Producto> productos = getProducts();
-        List<Integer> cantidad = getCantidad();
-        Venta venta = getVenta();
-
-        for(int i = 0; i< productos.size(); i++){
-            DetalleVentaAddDTO detalleVentaAddDTO = new DetalleVentaAddDTO(venta,productos.get(i),cantidad.get(i));
-            detalleVentaAddDTOS.add(detalleVentaAddDTO);
-        }
-        return  detalleVentaAddDTOS;
-    }
 
 
     @Test
     public void agregarDetalleVentaTest(){
 
-        List<Precio> precios = getPrecios();
-        List<DetalleVentaAddDTO> detalleVentaAddDTOS = getDetalleVenta();
+        List<Precio> precios = this.testDataProvider.getPrices();
+        List<DetalleVentaAddDTO> detalleVentaAddDTOS = this.testDataProvider.getDetalleVentaAdd();
         // Configura los mocks
 
         // Retorna el precio que tiene vinculado el producto con Id 1L

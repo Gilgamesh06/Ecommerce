@@ -35,8 +35,8 @@ public class ProductoServiceTest {
     @InjectMocks
     private ProductoService productoService;
 
-    @InjectMocks
-    private TestDataProvider testDataProvider;
+    // Instancimiento de datos
+    private TestDataProvider testDataProvider = new TestDataProvider();
 
     @Test
     public void guardaProductosNoExitentesTest() {

@@ -42,8 +42,8 @@ public class DetalleVentaServiceTest {
     @InjectMocks
     private DetalleVentaService detalleVentaService;
 
-    @InjectMocks
-    private TestDataProvider testDataProvider;
+    // Instancimiento de datos
+    private TestDataProvider testDataProvider = new TestDataProvider();
 
 
 

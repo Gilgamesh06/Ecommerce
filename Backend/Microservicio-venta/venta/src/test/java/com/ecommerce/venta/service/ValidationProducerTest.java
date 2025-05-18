@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 public class ValidationProducerTest {
 
-    @InjectMocks
-    private TestDataProvider testDataProvider;
+    // Instancimiento de datos
+    private TestDataProvider testDataProvider = new TestDataProvider();
 
     @InjectMocks
     private ValidationProduct validationProduct;

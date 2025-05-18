@@ -51,8 +51,8 @@ public class VentaServiceTest {
     @InjectMocks
     private VentaService ventaService;
 
-    @InjectMocks
-    private TestDataProvider testDataProvider;
+    // Instancimiento de datos
+    private TestDataProvider testDataProvider = new TestDataProvider();
 
     @Test
     public void createVentaTest() {

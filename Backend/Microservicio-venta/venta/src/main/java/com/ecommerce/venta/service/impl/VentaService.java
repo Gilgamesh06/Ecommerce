@@ -70,7 +70,7 @@ public class VentaService {
     private Venta crearVenta(){
         Venta venta = new Venta();
         venta.setFecha(LocalDateTime.now());
-        return venta;
+        return this.ventaRepository.save(venta);
     }
     private List<DetalleVentaAddDTO> crearDetalleVenta(Venta venta, List<CarritoResponseDTO> carritoResponseDTOs,
                                                        List<Producto> productos){
@@ -99,7 +99,6 @@ public class VentaService {
     private Venta guardarVenta(Venta venta, Double valorVenta){
         venta.setValorVenta(valorVenta);
         venta.setEstado("Exitosa");
-        venta = this.ventaRepository.save(venta);
         venta.setReferencia("REF-"+ venta.getId());
         return this.ventaRepository.save(venta);
     }
@@ -116,9 +115,6 @@ public class VentaService {
             List<Long> productIds = obtenerIds(carritoResponseDTOs);
             // Obtiene una lista de InventarioResponseDTO a paritr de los id de los productos
             List<InventarioResponseDTO> productosInventario = obtenerPorductosInventario(productIds);
-
-            // Crea un Optional que almacena un VentaResponseDTO
-            Optional<VentaResponseDTO> ventaResponseOpt = Optional.empty();
 
             // Si la cantidad de productos es suficiente entra en el if
             if(this.validationProduct.validarProductos(productosInventario,carritoResponseDTOs)){
@@ -143,7 +139,7 @@ public class VentaService {
                 // Retornar una VentaResponseDTO
                 return Optional.of(converVentaResponseDTO(venta,detalleVentaResposeDTOS));
             }
-            return ventaResponseOpt;
+            return Optional.empty();
     }
 
     private Optional<Venta> searchVentaWithReferencia(String referencia){

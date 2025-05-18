@@ -30,9 +30,8 @@ public class PrecioServiceTest {
     @InjectMocks
     private PrecioService precioService;
 
-    @InjectMocks
-    private TestDataProvider testDataProvider;
-
+    // Instancimiento de datos
+    private TestDataProvider testDataProvider = new TestDataProvider();
 
     @Test
     public void addNewPriceTest(){

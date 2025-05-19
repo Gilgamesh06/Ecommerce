@@ -23,8 +23,9 @@ public class CatalogoController {
     }
 
     @GetMapping("/filtros")
-    public Map<String, Set<String>> getFiltros(){
-        return this.catalogoService.TypesOfTheFilter();
+    public ResponseEntity<Map<String, Set<String>>> getFiltros(){
+        Map<String,Set<String>> filtros = this.catalogoService.TypesOfTheFilter();
+        return new ResponseEntity<>(filtros,HttpStatus.OK);
     }
 
 

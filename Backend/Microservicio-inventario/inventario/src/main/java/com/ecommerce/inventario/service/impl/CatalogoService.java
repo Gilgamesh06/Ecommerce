@@ -55,8 +55,11 @@ public class CatalogoService {
     }
 
     private Page<ProductoAgrupadoDTO> filterProducts(Page<Producto> productosPage) {
+        // Recibe los productos paginados y los covierte en un mapa
+        // Agrupandolos por referencia
         Map<String, List<Producto>> productosPorReferencia = groupMapProductosByReference(productosPage);
 
+        // convierte el mapa de productos  en una lista de Productos agrupasdos
         List<ProductoAgrupadoDTO> productosAgrupadosDTO = productosPorReferencia.entrySet().stream().map(entry -> {
             String referencia = entry.getKey();
             List<Producto> productosDeReferencia = entry.getValue();
@@ -81,18 +84,22 @@ public class CatalogoService {
                     variantes
             );
         }).toList();
-
+        // Retorna la lista de productos agrupados de forma pageable
         return new PageImpl<>(productosAgrupadosDTO, productosPage.getPageable(), productosPage.getTotalElements());
     }
 
     public Page<ProductoAgrupadoDTO> filterProductsTargets(String target, String tipo, String subtipo, Pageable pageable){
         Page<Producto> productosPage;
-
+        // determina a cual de los metodo debe usar dependiendo de que paramaetros tenga
         if (tipo == null || tipo.isBlank()) {
+            // si tipo es null o tipo es una cadena vacia utiliza target que es obligatorio
             productosPage = getProductsByTarget(target, pageable);
         } else if (subtipo == null || subtipo.isBlank()) {
+            // si el subtipo es nulo o es vacio utiliza el metodo targetAndTipo
             productosPage = getProductsByTargetAndTipo(target, tipo, pageable);
         } else {
+            // por ultimo sitodo los parametros son pasados se usa el metodo
+            // TwrgetAndTipoAndSubtip
             productosPage = getProductsByTargetAndTipoAndSubtipo(target, tipo, subtipo, pageable);
         }
 
@@ -100,6 +107,7 @@ public class CatalogoService {
     }
 
     public Map<String, Set<String>> TypesOfTheFilter(){
+        // Retorna un mapa de los filtros que se pueden selecionar
         Set<String> tipos = this.productoRepository.findDistinctTipos();
         Map<String, Set<String>> fitros = new HashMap<>();
         for(String tipo: tipos){

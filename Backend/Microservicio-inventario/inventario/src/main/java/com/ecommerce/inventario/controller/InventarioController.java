@@ -22,8 +22,11 @@ public class InventarioController {
 
     @GetMapping("/listar-todos")
     public ResponseEntity<List<InventarioResponseDTO>> getAll(){
-        List<InventarioResponseDTO> inventarios = this.inventarioService.findAll();
-        return new ResponseEntity<>(inventarios, HttpStatus.OK);
+        List<InventarioResponseDTO> inventario = this.inventarioService.findAll();
+        if(inventario.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(inventario, HttpStatus.OK);
     }
 
     @GetMapping("/listar")

@@ -26,7 +26,7 @@ public class InventarioService implements CrudInterface<Inventario,InventarioRes
         this.productoService = productoService;
     }
 
-    private InventarioResponseDTO convetiddorInventarioResponseDTO(Inventario inventario){
+    private InventarioResponseDTO convertInventarioResponseDTO(Inventario inventario){
         InventarioResponseDTO inventarioResponseDTO = new InventarioResponseDTO();
         ProductoInfoDTO productoInfoDTO = new ProductoInfoDTO();
         Producto producto = inventario.getProducto();
@@ -43,32 +43,55 @@ public class InventarioService implements CrudInterface<Inventario,InventarioRes
         return inventarioResponseDTO;
     }
 
+    public ProductoSearchDTO converProductoSearchDTO(String referencia,
+                                                     String talla,String color){
+        ProductoSearchDTO productoSearchDTO = new ProductoSearchDTO();
+        productoSearchDTO.setReferencia(referencia);
+        productoSearchDTO.setTalla(talla);
+        productoSearchDTO.setColor(color);
+        return productoSearchDTO;
+    }
+
     public Optional<InventarioResponseDTO> findByAtributes(ProductoSearchDTO productoSearchDTO){
-        Optional<Producto> productoOpt = Optional.ofNullable(this.productoService.searchProduct(productoSearchDTO));
-        Optional<InventarioResponseDTO> inventarioResponseOpt = Optional.empty();
+        // Busca el producto en la base de datos
+        Optional<Producto> productoOpt = this.productoService.searchProduct(productoSearchDTO);
         if(productoOpt.isPresent()){
-           Optional<Inventario> inventario =  this.inventarioRepository.findByProductoId(productoOpt.get().getId());
-           InventarioResponseDTO inventarioResponseDTO = this.convetiddorInventarioResponseDTO(inventario.get());
-           return inventarioResponseOpt.of(inventarioResponseDTO);
+            // busca el inventario asociado a ese producto
+           Optional<Inventario> inventarioOpt =  this.inventarioRepository.findByProductoId(productoOpt.get().getId());
+           if(inventarioOpt.isPresent()){
+               // si lo encuentra la convierte en un DTO InventarioResponseDTO
+               InventarioResponseDTO inventarioResponseDTO = this.convertInventarioResponseDTO(inventarioOpt.get());
+               return Optional.of(inventarioResponseDTO);
+           }
         }
-        return inventarioResponseOpt;
+        return Optional.empty();
     }
 
     public List<InventarioResponseDTO> findAll(){
         List<Inventario> inventarios = this.inventarioRepository.findAll();
         return inventarios.stream()
-                .map(this::convetiddorInventarioResponseDTO)
+                .map(this::convertInventarioResponseDTO)
                 .toList();
     }
 
     @Transactional
     public InventarioResponseDTO addElement(InventarioAddDTO inventarioAddDTO){
-        Producto producto = this.productoService.addProduct(inventarioAddDTO.getProductoAddDTO());
-        Inventario inventario = new Inventario();
-        inventario.setCantidad(inventarioAddDTO.getCantidad());
-        inventario.setProducto(producto);
-        this.inventarioRepository.save(inventario);
-        return convetiddorInventarioResponseDTO(inventario);
+        // Verifica que el producto ya no este en el inventario
+        ProductoSearchDTO productoSearchDTO = converProductoSearchDTO(inventarioAddDTO.getProductoAddDTO().getReferencia(),inventarioAddDTO.getProductoAddDTO().getTalla()
+                ,inventarioAddDTO.getProductoAddDTO().getColor());
+        Optional<InventarioResponseDTO> inventarioOpt = findByAtributes(productoSearchDTO);
+        if(inventarioOpt.isEmpty()){
+            // Ingresa si el producto no esta y lo crea
+            Producto producto = this.productoService.addProduct(inventarioAddDTO.getProductoAddDTO());
+            Inventario inventarioCreate = new Inventario();
+            inventarioCreate.setCantidad(inventarioAddDTO.getCantidad());
+            inventarioCreate.setProducto(producto);
+            Inventario inventario = this.inventarioRepository.save(inventarioCreate);
+            // Convierte el producto en un dto InventarioResponseDTO
+            return convertInventarioResponseDTO(inventario);
+        }
+
+        return inventarioOpt.get();
     }
 
     private List<Inventario> getInventario(List<Long> ids){
@@ -78,7 +101,7 @@ public class InventarioService implements CrudInterface<Inventario,InventarioRes
     public List<InventarioResponseDTO> getProducts(List<Long> ids){
        List<Inventario> inventarios = getInventario(ids);
        return inventarios.stream()
-               .map(this::convetiddorInventarioResponseDTO)
+               .map(this::convertInventarioResponseDTO)
                .toList();
     }
 

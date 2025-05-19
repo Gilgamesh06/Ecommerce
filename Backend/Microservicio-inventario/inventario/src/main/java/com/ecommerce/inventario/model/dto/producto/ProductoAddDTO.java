@@ -38,7 +38,7 @@ public class ProductoAddDTO {
 
     public ProductoAddDTO() {}
 
-    public ProductoAddDTO(String referencia, String nombre,String tipo, String talla, String color, String target, String subtipo, Double precioUnid, Double precioVenta , DetalleProductoAddDTO detalleProductoAddDTO){
+    public ProductoAddDTO(String referencia, String nombre,String talla, String color,String tipo, String subtipo, String target, Double precioUnid, Double precioVenta , DetalleProductoAddDTO detalleProductoAddDTO){
         this.referencia = referencia;
         this.nombre = nombre;
         this.tipo = tipo;

@@ -32,6 +32,7 @@ public class DetalleProductoService {
     }
 
     public DetalleProducto addDetailProduct(DetalleProductoAddDTO detalleProductoAddDTO){
+        // Se crea un detalle producto  y con los datos del DTO
         DetalleProducto detalleProducto = new DetalleProducto();
         detalleProducto.setComposicion(detalleProductoAddDTO.getComposicion());
         detalleProducto.setDescripcion(detalleProductoAddDTO.getDescripcion());

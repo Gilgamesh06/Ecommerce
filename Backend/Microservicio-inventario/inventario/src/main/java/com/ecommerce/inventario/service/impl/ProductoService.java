@@ -33,23 +33,25 @@ public class ProductoService implements CrudInterface<Producto,ProductoResponseD
         return productoResponseDTO;
     }
 
-    public Producto searchProduct(ProductoSearchDTO productoSearchDTO){
+    public Optional<Producto> searchProduct(ProductoSearchDTO productoSearchDTO){
         String referencia = productoSearchDTO.getReferencia();
         String talla = productoSearchDTO.getTalla();
         String color = productoSearchDTO.getColor();
-        Optional<Producto> productoOpt = this.productoRepository.findByReferenciaAndTallaAndColor(referencia,talla,color);
-        return productoOpt.orElse(null);
+        return this.productoRepository.findByReferenciaAndTallaAndColor(referencia,talla,color);
     }
 
     @Override
     public Optional<ProductoResponseDTO> findByAtributes(ProductoSearchDTO productoSearchDTO) {
-        Optional<ProductoResponseDTO> responseOpt = Optional.empty();
-        if(searchProduct(productoSearchDTO) != null){
-            Producto producto = searchProduct(productoSearchDTO);
-            ProductoResponseDTO productoResponseDTO = convertProductoResponseDTO(producto);
-            return responseOpt.of(productoResponseDTO);
+        // Obtiene un Optional Producto a partir del dto productoSearchDTO
+        Optional<Producto> productoOpt = searchProduct(productoSearchDTO);
+        if(productoOpt.isPresent()){
+            // Ingresa si Producto esta contenido en Optional
+            // Lo comvierte en un ProductoResponse
+            ProductoResponseDTO productoResponseDTO = convertProductoResponseDTO(productoOpt.get());
+            // Retorna un Optiona ProductoResponseDTO
+            return Optional.of(productoResponseDTO);
         }
-        return responseOpt;
+        return Optional.empty();
     }
 
     @Override
@@ -62,7 +64,9 @@ public class ProductoService implements CrudInterface<Producto,ProductoResponseD
 
     @Transactional
     public Producto addProduct(ProductoAddDTO productoAddDTO){
+        // Se crea los detalle producto a partir del dto ProductoAddDTO
         DetalleProducto detalleProducto = this.detalleProductoService.addDetailProduct(productoAddDTO.getDetalleProductoAddDTO());
+        // Convierte un productoAddDTO en un Objecto de tipo Producto
         Producto producto = Stream.of(productoAddDTO)
                 .map(dto -> {
                     Producto p = new Producto();
@@ -80,13 +84,15 @@ public class ProductoService implements CrudInterface<Producto,ProductoResponseD
                 })
                 .findFirst()
                 .orElse(null);
-        this.productoRepository.save(producto);
-        return producto;
+        // Guarda el producto en la base de datos
+        return this.productoRepository.save(producto);
     }
 
     @Override
     public ProductoResponseDTO addElement(ProductoAddDTO productoAddDTO) {
+        // LLama al metodo que me guarda el producto y lo obtiene
         Producto producto = addProduct(productoAddDTO);
+        // Conviete el Producto en un ProductoResponseDTO
         return convertProductoResponseDTO(producto);
     }
 

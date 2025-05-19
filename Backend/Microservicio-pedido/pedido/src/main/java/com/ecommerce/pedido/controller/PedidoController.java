@@ -24,8 +24,12 @@ public class PedidoController {
     }
 
     @GetMapping("/listar-pedidos")
-    public List<PedidoResponseSimpleDTO> getAllPedidos(){
-        return this.pedidoService.getAllPedidos();
+    public ResponseEntity<List<PedidoResponseSimpleDTO>> getAllPedidos(){
+        List<PedidoResponseSimpleDTO> pedidos = this.pedidoService.getAllPedidos();
+        if(pedidos.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(pedidos,HttpStatus.OK);
     }
 
     @GetMapping("/listar/{referencia}")

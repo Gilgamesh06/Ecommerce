@@ -51,6 +51,7 @@ public class PedidoService {
     }
 
     private Pedido crearPedido(PedidoAddDTO pedidoAddDTO){
+        // Crea el pedido utilizando la referencia de la venta y el precio total
         Pedido pedido = new Pedido();
         pedido.setReferenciaVenta(pedidoAddDTO.getReferencia());
         pedido.setFechaRealizacion(LocalDateTime.now());
@@ -71,36 +72,48 @@ public class PedidoService {
     }
 
     private Pedido guardarPedido(PedidoAddDTO pedidoAddDTO){
+        // utiliza el metodo crearPedido para crear el pedido y lo almacena
        return this.pedidoRepository.save(crearPedido(pedidoAddDTO));
     }
 
 
     public PedidoResponseSimpleDTO addPedido(PedidoAddDTO pedidoAddDTO){
+            // Obtiene un Optional pedido por medio de la referencia de la venta
             Optional<Pedido> pedidoOpt = getPedido(pedidoAddDTO.getReferencia());
             if((pedidoOpt.isEmpty())){
+                // Ingresa si el el Optional no contiene un objeto de tipo Pedido
+                // Crea el pedido usando el metodo guardarPedido
                 Pedido pedido = guardarPedido(pedidoAddDTO);
+                // Conviete el pedido en un dto de respuesta y lo retorna
                 return convertPedidoResponseSimpleDTO(pedido);
             }
+            // Conviete el pedido en un dto de respuesta y lo retorna
             return convertPedidoResponseSimpleDTO(pedidoOpt.get());
-
     }
 
     public Optional<Pedido> getPedido(String referencia){
+        // retorna un Optional Pedido on la referecia suministrada si no encuentra devuelve
+        // un Optional empty
         return  this.pedidoRepository.findByReferenciaVenta(referencia);
     }
 
     public Optional<PedidoResponseCompleteDTO> getPedidoComplete(String referencia){
+        // Obtiene un Optional Pedio por medio de la referencia de la venta
         Optional<Pedido> pedidoOpt = getPedido(referencia);
-        Optional<PedidoResponseCompleteDTO> pedidoResponseCompleteOpt = Optional.empty();
         if(pedidoOpt.isPresent()){
+            // Ingresa si el Optional tiene un Objeto de tipo pedido
+            // LLama al metodo del microservicio Venta por medio de HTTP para obtener los detalle de la venta
            List<DetalleVentaResponseDTO> detalleVentaResponseDTOS = this.ventaClient.getDetallePedido(referencia);
            if(!detalleVentaResponseDTOS.isEmpty()){
+               // Ingresa si la lista no es vacia
+               // Crea un PedioResponseCompleteDTO a partir del pedido y su lista de detalleVentaResponseDTO
                PedidoResponseCompleteDTO pedidoResponseCompleteDTO = converPedidoResponseCompleteDTO(pedidoOpt.get(),
                        detalleVentaResponseDTOS);
+               // La encapsula en un Optional y la Retorna
                return Optional.of(pedidoResponseCompleteDTO);
            }
         }
-        return pedidoResponseCompleteOpt;
+        return Optional.empty();
     }
 
     private List<String> getAllReference(List<Pedido> pedidos){

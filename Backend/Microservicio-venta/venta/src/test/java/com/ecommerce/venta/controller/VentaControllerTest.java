@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -95,7 +96,7 @@ public class VentaControllerTest {
     }
 
     @Test
-    public void getAllDetalleVentaByReferenceIsOkTest() throws Exception{
+    public void getDetalleVentaByReferenceIsOkTest() throws Exception{
 
         // Datos que debe devolver el service Venta
         List<VentaResponseDTO> ventas = this.testDataProvider.getAllVentaResponseDTO();
@@ -113,7 +114,7 @@ public class VentaControllerTest {
     }
 
     @Test
-    public void getAllDetalleVentaByReferenceIsNotFoundTest() throws Exception{
+    public void getDetalleVentaByReferenceIsNotFoundTest() throws Exception{
 
         // Referencia
         String referencia = "0001";
@@ -124,6 +125,47 @@ public class VentaControllerTest {
         mockMvc.perform(get("/api/v1/ventas/obtener-detalles/{referencia}", referencia))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    public void getAllDetalleVentaByReferenceIsOKTest() throws Exception{
+
+        List<List<DetalleVentaResponseDTO>> detalleVentas = new ArrayList<>();
+
+        String referenciaSend = "[ \"0001\",\"0002\"]";
+
+        List<DetalleVentaResponseDTO> detalles1 = this.testDataProvider.getDetalleVentaResponse();
+        List<DetalleVentaResponseDTO> detalles2 = List.of(detalles1.get(0), detalles1.get(1));
+        detalleVentas.add(detalles1);
+        detalleVentas.add(detalles2);
+
+        // Al ingresar la referecia 0001 retorna una lista de listas
+        when(this.ventaService.obtenerAllDetalles(anyList())).thenReturn(detalleVentas);
+
+        mockMvc.perform(get("/api/v1/ventas/obtener-detalles/all")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(referenciaSend))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].[0].cantidad").value(detalles1.getFirst().getCantidad()))
+                .andExpect(jsonPath("$[0].[0].precioTotal").value(detalles1.getFirst().getPrecioTotal()))
+                .andExpect(jsonPath("$[0].[0].producto.nombre").value(detalles1.getFirst().getProducto().getNombre()));
+    }
+
+    @Test
+    public void getAllDetalleVentaByReferenceIsNotFoundTest() throws Exception{
+
+
+        String referenciaSend = "[ \"0001\",\"0002\"]";
+
+        // Al ingresar la referecia 0001 retorna una lista vacia
+        when(this.ventaService.obtenerAllDetalles(anyList())).thenReturn(new ArrayList<>());
+
+        mockMvc.perform(get("/api/v1/ventas/obtener-detalles/all")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(referenciaSend))
+                .andExpect(status().isNotFound());
+    }
+
 
     @Test
     public void addVentaIsCreatedTest() throws Exception{

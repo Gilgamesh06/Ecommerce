@@ -192,4 +192,14 @@ public class VentaService {
         return Optional.empty();
     }
 
+    public List<List<DetalleVentaResponseDTO>> obtenerAllDetalles(List<String> referencia) {
+        List<List<DetalleVentaResponseDTO>> listDetallesVenta = new ArrayList<>();
+        for (String ref : referencia) {
+            List<DetalleVentaResponseDTO> detalleVentaResposeDTOS = obtenerDetalles(ref);
+            listDetallesVenta.add(detalleVentaResposeDTOS);
+
+        }
+        return listDetallesVenta;
+    }
+
 }

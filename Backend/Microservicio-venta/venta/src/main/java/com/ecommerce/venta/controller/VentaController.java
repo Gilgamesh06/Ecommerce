@@ -53,4 +53,13 @@ public class VentaController {
         }
         return new ResponseEntity<>(detalleVentaResposeDTOS, HttpStatus.OK);
     }
+
+    @GetMapping("/obtener-detalles/all")
+    public  ResponseEntity<List<List<DetalleVentaResponseDTO>>> getAllDetallesVenta(@RequestBody List<String> referencia){
+        List<List<DetalleVentaResponseDTO>> listDetalleVenta = this.ventaService.obtenerAllDetalles(referencia);
+        if(listDetalleVenta.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(listDetalleVenta, HttpStatus.OK);
+    }
 }

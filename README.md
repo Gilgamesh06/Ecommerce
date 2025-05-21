@@ -2,8 +2,9 @@
 
 * El proyecto es un Ecomerce para una tienda de ropa al por menor para ello el proyecto esta dividido en:
 
-    * [**Backend**](/Backend/)
-    * **Frontend**
+    [![Frontend](/Images/Frontend.png)](https://github.com/Nbryan11/FrontendEcommerceSpring)
+    [![Backend](/Images/Backend.png)](/Backend/)
+
 
     ## EDT
 

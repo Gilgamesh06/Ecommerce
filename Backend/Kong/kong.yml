@@ -52,14 +52,6 @@ routes:
       - POST
     strip_path: false
 
-  - name: inventario-listar-productos-route
-    service: inventario-service
-    paths:
-      - /api/v1/inventario/listar-productos
-    methods:
-      - POST
-    strip_path: false
-
   # Rutas del Microservicio de Ventas
   - name: ventas-realiza-venta-route
     service: ventas-service
@@ -77,24 +69,16 @@ routes:
       - GET
     strip_path: false
 
-  - name: ventas-obtener-detalles-referencia-route
+  - name: ventas-obtener-venta-route
     service: ventas-service
     paths:
-      - /api/v1/ventas/obtener-detalles/{referencia}
+      - /api/v1/obtener-venta/{referencia}
     methods:
       - GET
     strip_path: false
-
-  - name: ventas-obtener-detalles-all-route
-    service: ventas-service
-    paths:
-      - /api/v1/ventas/obtener-detalles/all
-    methods:
-      - GET
-    strip_path: false
-
 
   # Rutas del Microservicio de Pedidos
+
   - name: pedidos-listar-pedidos-route
     service: pedidos-service
     paths:

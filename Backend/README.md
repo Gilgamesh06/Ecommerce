@@ -29,8 +29,16 @@
 
         ![Carrito](/Diagramas/DB/carrito.png)
 
+    ## Diagrama de Casos de Uso
+    
+    * Diagrama de casos de uso para realizar un pedido
+
+        ![Casos de uso](/Diagramas/UML/Casos%20De%20Uso/UserCase.png)
+
     ## Diagrama de Actividades
 
     * El proceso de realizacion de un pedido esta dado por el diagrama:
 
         ![Actividades](/Diagramas/UML/Actividades/Pedidos.png)
+
+    

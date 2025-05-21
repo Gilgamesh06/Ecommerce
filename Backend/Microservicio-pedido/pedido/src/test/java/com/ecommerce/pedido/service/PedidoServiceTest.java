@@ -36,8 +36,10 @@ public class PedidoServiceTest {
         // Objeto que recibe el metodo addPedido
         PedidoAddDTO  pedidoAddDTO = this.testDataProvider.getPedidoAddDTO();
 
-        // Busca si ya estiste el pedido en este caso lo estamos creado por lo cual retorna un Optional empty
-        when(this.pedidoRepository.findByReferenciaVenta(eq(pedidoAddDTO.getReferencia()))).thenReturn(Optional.empty());
+        // Busca si ya estiste el pedido en este caso lo estamos creado
+        // por lo cual retorna un Optional empty
+        when(this.pedidoRepository.findByReferenciaVenta(eq(pedidoAddDTO.getReferencia())))
+                .thenReturn(Optional.empty());
 
         // Retorna el objeto que recibe en este caso un Objeto de tipo Pedido
         when(this.pedidoRepository.save(any(Pedido.class))).thenAnswer(

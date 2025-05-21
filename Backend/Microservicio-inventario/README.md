@@ -160,55 +160,59 @@
 
         ```json
         {
-            "content": [
-                {
-                "referencia": "REF004",
-                "nombre": "Chaqueta de Invierno",
-                "tallas": [
-                    "S"
-                ],
-                "colores": [
-                    "Rojo"
-                ],
-                "variantes": [
-                    {
-                    "id": 4,
-                    "talla": "S",
-                    "color": "Rojo",
-                    "precio": null,
-                    "detalle": {
-                        "descripcion": "Chaqueta de invierno con aislamiento térmico.",
-                        "composicion": "100% poliéster",
-                        "pais": "Francia"
-                    }
-                    }
-                ]
-                }
+        "content": [
+            {
+            "referencia": "REF004",
+            "nombre": "Chaqueta de Invierno",
+            "id": 4,
+            "talla": "S",
+            "color": "Rojo",
+            "precio": 95,
+            "tallas": [
+                "S"
             ],
-            "pageable": {
-                "pageNumber": 0,
-                "pageSize": 10,
-                "sort": {
-                "sorted": true,
-                "empty": false,
-                "unsorted": false
-                },
-                "offset": 0,
-                "paged": true,
-                "unpaged": false
-            },
-            "totalElements": 1,
-            "totalPages": 1,
-            "last": true,
-            "size": 10,
-            "number": 0,
+            "colores": [
+                "Rojo"
+            ],
+            "variantes": [
+                {
+                "id": 4,
+                "talla": "S",
+                "color": "Rojo",
+                "precio": 95,
+                "detalle": {
+                    "descripcion": "Chaqueta de invierno con aislamiento térmico.",
+                    "composicion": "100% poliéster",
+                    "pais": "Francia"
+                }
+                }
+            ]
+            }
+        ],
+        "pageable": {
+            "pageNumber": 0,
+            "pageSize": 10,
             "sort": {
-                "sorted": true,
-                "empty": false,
-                "unsorted": false
+            "sorted": true,
+            "empty": false,
+            "unsorted": false
             },
-            "numberOfElements": 1,
-            "first": true,
-            "empty": false
+            "offset": 0,
+            "paged": true,
+            "unpaged": false
+        },
+        "last": true,
+        "totalElements": 1,
+        "totalPages": 1,
+        "size": 10,
+        "number": 0,
+        "sort": {
+            "sorted": true,
+            "empty": false,
+            "unsorted": false
+        },
+        "first": true,
+        "numberOfElements": 1,
+        "empty": false
         }
         ``` 

@@ -47,7 +47,7 @@ public class CarritoService {
         this.hashOperations.delete(CARRITO_KEY_PREFIX + sessionId, productoId);
     }
 
-    public void updateCantidad(String sessionId, String productoId, int nuevaCantidad) {
+    public void updateCantidad(String sessionId, String productoId, Integer nuevaCantidad) {
         Producto producto = this.hashOperations.get(CARRITO_KEY_PREFIX + sessionId, productoId);
         if (producto != null) {
             if(nuevaCantidad > 0){
@@ -67,7 +67,9 @@ public class CarritoService {
             if(producto.getCantidad() == 0){
                 deleteProduct(sessionId,productoId);
             }
-            this.hashOperations.put(CARRITO_KEY_PREFIX + sessionId, productoId, producto);
+            else{
+                this.hashOperations.put(CARRITO_KEY_PREFIX + sessionId, productoId, producto);
+            }
         }
     }
 

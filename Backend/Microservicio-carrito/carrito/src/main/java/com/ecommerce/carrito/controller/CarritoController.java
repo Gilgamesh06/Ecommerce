@@ -48,19 +48,17 @@ public class CarritoController {
 
     @PutMapping("/{sessionId}/actualizar/{productoId}/{cantidad}")
     public void updateCantidad(@PathVariable String sessionId , @PathVariable Long productoId
-            , Integer cantidad){
+            , @PathVariable Integer cantidad){
         this.carritoService.updateCantidad(sessionId,String.valueOf(productoId),cantidad);
     }
 
     @PutMapping("/{sessionId}/aumentar/{productoId}")
-    public void increaseCantidad(@PathVariable String sessionId , @PathVariable Long productoId
-            , Integer cantidad){
+    public void increaseCantidad(@PathVariable String sessionId , @PathVariable Long productoId){
         this.carritoService.increaseCantidad(sessionId,String.valueOf(productoId));
     }
 
     @PutMapping("/{sessionId}/disminuir/{productoId}")
-    public void decreaseCantidad(@PathVariable String sessionId , @PathVariable Long productoId
-            , Integer cantidad){
+    public void decreaseCantidad(@PathVariable String sessionId , @PathVariable Long productoId){
         this.carritoService.decreaseCantidad(sessionId,String.valueOf(productoId));
     }
 

@@ -28,6 +28,7 @@ public class VarianteDTO {
         this.id = id;
         this.talla = talla;
         this.color = color;
+        this.precio = precio;
         this.detalle = detalle;
     }
 

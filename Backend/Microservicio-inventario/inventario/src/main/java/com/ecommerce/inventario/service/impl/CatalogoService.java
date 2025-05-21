@@ -79,6 +79,10 @@ public class CatalogoService {
             return new ProductoAgrupadoDTO(
                     referencia,
                     productoPrincipal.getNombre(),
+                    productoPrincipal.getId(),
+                    productoPrincipal.getTalla(),
+                    productoPrincipal.getColor(),
+                    productoPrincipal.getPrecioVenta(),
                     tallas,
                     colores,
                     variantes

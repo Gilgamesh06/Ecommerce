@@ -45,7 +45,7 @@ public class CatalogoControllerTest {
     private List<ProductoAgrupadoDTO> crearListaProductosAgrupados() {
         DetalleProductoResponseDTO detalleDTO = new DetalleProductoResponseDTO("Info Detalle", "Algodón", "China");
         VarianteDTO variante1 = new VarianteDTO(1L, "M", "Azul", 25.99, detalleDTO);
-        ProductoAgrupadoDTO producto1 = new ProductoAgrupadoDTO("REF001", "Camisa Azul", Set.of("M"), Set.of("Azul"), List.of(variante1));
+        ProductoAgrupadoDTO producto1 = new ProductoAgrupadoDTO("REF001", "Camisa Azul",1L,"L","Azul",20.99, Set.of("M"), Set.of("Azul"), List.of(variante1));
         return List.of(producto1);
     }
 

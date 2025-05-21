@@ -48,7 +48,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/agregar/2/3",
+                  "raw": "http://localhost:8084/api/v1/carrito/d44cfc3e-73fa-4cda-9bec-419b699dc57f/actualizar/2/3",
                   "protocol": "http",
                   "host": [
                     "localhost:8084"
@@ -57,8 +57,8 @@
                     "api",
                     "v1",
                     "carrito",
-                    "fa57c212-3e57-4805-a245-ae16249f269e",
-                    "agregar",
+                    "d44cfc3e-73fa-4cda-9bec-419b699dc57f",
+                    "actualizar",
                     "2",
                     "3"
                   ],
@@ -90,7 +90,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/agregar/1",
+                  "raw": "http://localhost:8084/api/v1/carrito/d44cfc3e-73fa-4cda-9bec-419b699dc57f/agregar/1",
                   "protocol": "http",
                   "host": [
                     "localhost:8084"
@@ -99,7 +99,7 @@
                     "api",
                     "v1",
                     "carrito",
-                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "d44cfc3e-73fa-4cda-9bec-419b699dc57f",
                     "agregar",
                     "1"
                   ],
@@ -135,7 +135,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/agregar/2",
+                  "raw": "http://localhost:8084/api/v1/carrito/d44cfc3e-73fa-4cda-9bec-419b699dc57f/agregar/2",
                   "protocol": "http",
                   "host": [
                     "localhost:8084"
@@ -144,7 +144,7 @@
                     "api",
                     "v1",
                     "carrito",
-                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "d44cfc3e-73fa-4cda-9bec-419b699dc57f",
                     "agregar",
                     "2"
                   ],
@@ -173,7 +173,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/agregar/3",
+                  "raw": "http://localhost:8084/api/v1/carrito/d44cfc3e-73fa-4cda-9bec-419b699dc57f/agregar/3",
                   "protocol": "http",
                   "host": [
                     "localhost:8084"
@@ -182,7 +182,7 @@
                     "api",
                     "v1",
                     "carrito",
-                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "d44cfc3e-73fa-4cda-9bec-419b699dc57f",
                     "agregar",
                     "3"
                   ],
@@ -216,7 +216,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/comprar",
+                  "raw": "http://localhost:8084/api/v1/carrito/d44cfc3e-73fa-4cda-9bec-419b699dc57f/comprar",
                   "protocol": "http",
                   "host": [
                     "localhost:8084"
@@ -225,7 +225,7 @@
                     "api",
                     "v1",
                     "carrito",
-                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "d44cfc3e-73fa-4cda-9bec-419b699dc57f",
                     "comprar"
                   ],
                   "query": [],
@@ -249,7 +249,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/disminuir/1",
+                  "raw": "http://localhost:8084/api/v1/carrito/d44cfc3e-73fa-4cda-9bec-419b699dc57f/disminuir/1",
                   "protocol": "http",
                   "host": [
                     "localhost:8084"
@@ -258,7 +258,7 @@
                     "api",
                     "v1",
                     "carrito",
-                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "d44cfc3e-73fa-4cda-9bec-419b699dc57f",
                     "disminuir",
                     "1"
                   ],
@@ -283,7 +283,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/eliminar/3",
+                  "raw": "http://localhost:8084/api/v1/carrito/d44cfc3e-73fa-4cda-9bec-419b699dc57f/eliminar/3",
                   "protocol": "http",
                   "host": [
                     "localhost:8084"
@@ -292,7 +292,7 @@
                     "api",
                     "v1",
                     "carrito",
-                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "d44cfc3e-73fa-4cda-9bec-419b699dc57f",
                     "eliminar",
                     "3"
                   ],
@@ -317,7 +317,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e/aumentar/1",
+                  "raw": "http://localhost:8084/api/v1/carrito/d44cfc3e-73fa-4cda-9bec-419b699dc57f/aumentar/1",
                   "protocol": "http",
                   "host": [
                     "localhost:8084"
@@ -326,7 +326,7 @@
                     "api",
                     "v1",
                     "carrito",
-                    "fa57c212-3e57-4805-a245-ae16249f269e",
+                    "d44cfc3e-73fa-4cda-9bec-419b699dc57f",
                     "aumentar",
                     "1"
                   ],
@@ -351,7 +351,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "http://localhost:8084/api/v1/carrito/fa57c212-3e57-4805-a245-ae16249f269e",
+                  "raw": "http://localhost:8084/api/v1/carrito/d44cfc3e-73fa-4cda-9bec-419b699dc57f",
                   "protocol": "http",
                   "host": [
                     "localhost:8084"
@@ -360,7 +360,7 @@
                     "api",
                     "v1",
                     "carrito",
-                    "fa57c212-3e57-4805-a245-ae16249f269e"
+                    "d44cfc3e-73fa-4cda-9bec-419b699dc57f"
                   ],
                   "query": [],
                   "variable": []
@@ -455,6 +455,65 @@
               ]
             },
             {
+              "name": "Target",
+              "item": [
+                {
+                  "name": "Hombre",
+                  "event": [],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "description": "",
+                    "url": {
+                      "raw": "http://localhost:8081/api/v1/catalogo/Hombre",
+                      "protocol": "http",
+                      "host": [
+                        "localhost:8081"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "catalogo",
+                        "Hombre"
+                      ],
+                      "query": [],
+                      "variable": []
+                    }
+                  }
+                },
+                {
+                  "name": "Mujer",
+                  "event": [],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "description": "",
+                    "url": {
+                      "raw": "http://localhost:8081/api/v1/catalogo/Mujer",
+                      "protocol": "http",
+                      "host": [
+                        "localhost:8081"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "catalogo",
+                        "Mujer"
+                      ],
+                      "query": [],
+                      "variable": []
+                    }
+                  }
+                }
+              ]
+            },
+            {
               "name": "Tipo",
               "item": [
                 {
@@ -517,65 +576,6 @@
                           "value": "Ropa"
                         }
                       ],
-                      "variable": []
-                    }
-                  }
-                }
-              ]
-            },
-            {
-              "name": "Target",
-              "item": [
-                {
-                  "name": "Hombre",
-                  "event": [],
-                  "request": {
-                    "method": "GET",
-                    "header": [],
-                    "auth": {
-                      "type": "noauth"
-                    },
-                    "description": "",
-                    "url": {
-                      "raw": "http://localhost:8081/api/v1/catalogo/Hombre",
-                      "protocol": "http",
-                      "host": [
-                        "localhost:8081"
-                      ],
-                      "path": [
-                        "api",
-                        "v1",
-                        "catalogo",
-                        "Hombre"
-                      ],
-                      "query": [],
-                      "variable": []
-                    }
-                  }
-                },
-                {
-                  "name": "Mujer",
-                  "event": [],
-                  "request": {
-                    "method": "GET",
-                    "header": [],
-                    "auth": {
-                      "type": "noauth"
-                    },
-                    "description": "",
-                    "url": {
-                      "raw": "http://localhost:8081/api/v1/catalogo/Mujer",
-                      "protocol": "http",
-                      "host": [
-                        "localhost:8081"
-                      ],
-                      "path": [
-                        "api",
-                        "v1",
-                        "catalogo",
-                        "Mujer"
-                      ],
-                      "query": [],
                       "variable": []
                     }
                   }
@@ -1230,6 +1230,38 @@
       ]
     },
     {
+      "name": "Kong",
+      "item": [
+        {
+          "name": "Get Products",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "http://localhost:80/api/v1/inventario/listar-todos",
+              "protocol": "http",
+              "host": [
+                "localhost:80"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "inventario",
+                "listar-todos"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "Pedido",
       "item": [
         {
@@ -1522,38 +1554,39 @@
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "name": "Kong",
-      "item": [
+        },
         {
-          "name": "Get Products",
-          "event": [],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "auth": {
-              "type": "noauth"
-            },
-            "description": "",
-            "url": {
-              "raw": "http://localhost/api/v1/inventario/listar-todos",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "inventario",
-                "listar-todos"
-              ],
-              "query": [],
-              "variable": []
+          "name": "Buscar",
+          "item": [
+            {
+              "name": "Buscar Venta REF: REF-3",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "http://localhost:8082/api/v1/ventas/obtener-venta/REF-3",
+                  "protocol": "http",
+                  "host": [
+                    "localhost:8082"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "ventas",
+                    "obtener-venta",
+                    "REF-3"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
             }
-          }
+          ]
         }
       ]
     }
